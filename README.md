@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://chiingu.github.io/portfolio">
-  <img src="https://capsule-render.vercel.app/api?type=venom&height=280&color=gradient&customColorList=0,2,2,5,30&text=MOURTADA%20BOUIZAKARNE&fontColor=ffffff&fontSize=36&fontAlignY=55&desc=DIGITAL%20ARCHITECT%20%2F%2F%201337_Rabat&descColor=22d3ee&descAlignY=72&stroke=ef4444&strokeWidth=2&animation=fadeIn" width="100%" alt="MOURTADA BOUIZAKARNE — DIGITAL ARCHITECT"/>
+  <img src="user-card.svg" width="100%" alt="MOURTADA BOUIZAKARNE — DIGITAL ARCHITECT"/>
 </a>
 
 </div>
