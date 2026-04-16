@@ -89,7 +89,7 @@
         
         <!-- Pure SVG Text replacing foreignObject -->
         <text y="58" class="mono font-12 text-dim">
-          <tspan x="15" dy="0">A robust Unix shell implementation in C. </tspan><tspan x="15" dy="16">Features piping & signals. </tspan>
+          <tspan x="15" dy="0">A robust Unix shell implementation in C. </tspan><tspan x="15" dy="16">Features piping &amp; signals. </tspan>
         </text>
 
         
@@ -299,7 +299,7 @@
         
         <!-- Pure SVG Text replacing foreignObject -->
         <text y="58" class="mono font-12 text-dim">
-          <tspan x="15" dy="0">SysAdmin & virtualization. Secure Debian </tspan><tspan x="15" dy="16">server with strict LVM/UFW policies. </tspan>
+          <tspan x="15" dy="0">SysAdmin &amp; virtualization. Secure Debian </tspan><tspan x="15" dy="16">server with strict LVM/UFW policies. </tspan>
         </text>
 
         
