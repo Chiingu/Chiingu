@@ -61,15 +61,15 @@
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Chiingu&show_icons=true&theme=transparent&title_color=ef4444&icon_color=22d3ee&text_color=ffffff&bg_color=030507&hide_border=true&include_all_commits=true&count_private=true&custom_title=SYSTEM_METRICS" width="49%" alt="GitHub Stats"/>
+<img src="https://github-readme-stats.vercel.app/api?username=Chiingu&show_icons=true&theme=dark&title_color=ef4444&icon_color=22d3ee&text_color=ffffff&bg_color=030507&hide_border=true&include_all_commits=true&count_private=true&custom_title=SYSTEM_METRICS" width="49%" alt="GitHub Stats"/>
 
-<img src="https://github-readme-streak-stats.herokuapp.com?user=Chiingu&theme=transparent&hide_border=true&background=030507&ring=ef4444&fire=ef4444&currStreakLabel=22d3ee&sideLabels=22d3ee&sideNums=ffffff&currStreakNum=ffffff&dates=ffffff60" width="49%" alt="Streak Stats"/>
+<img src="https://github-readme-streak-stats.herokuapp.com?user=Chiingu&theme=dark&hide_border=true&background=030507&ring=ef4444&fire=ef4444&currStreakLabel=22d3ee&sideLabels=22d3ee&sideNums=ffffff&currStreakNum=ffffff&dates=ffffff60" width="49%" alt="Streak Stats"/>
 
 </div>
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Chiingu&layout=compact&theme=transparent&title_color=ef4444&text_color=ffffff&bg_color=030507&hide_border=true&langs_count=8&custom_title=LANGUAGE_DISTRIBUTION" width="49%" alt="Top Languages"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Chiingu&layout=compact&theme=dark&title_color=ef4444&text_color=ffffff&bg_color=030507&hide_border=true&langs_count=8&custom_title=LANGUAGE_DISTRIBUTION" width="49%" alt="Top Languages"/>
 
 </div>
 
