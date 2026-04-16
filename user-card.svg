@@ -4,1008 +4,1268 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Orbitron:wght@500;700&amp;display=swap');
       
-      .bg { fill: #000000; stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; rx: 6px; }
+      .bg { fill: #000000; }
+      .mono { font-family: 'Share Tech Mono', monospace; }
+      .orbitron { font-family: 'Orbitron', sans-serif; }
+      .font-10 { font-size: 10px; }
       
-      .text-label { font-family: 'Share Tech Mono', monospace; font-size: 11px; fill: rgba(255, 255, 255, 0.4); letter-spacing: 0.1em; }
-      .text-dept { font-family: 'Share Tech Mono', monospace; font-size: 14px; fill: #ef4444; font-weight: bold; letter-spacing: 0.1em; }
-      .text-class { font-family: 'Share Tech Mono', monospace; font-size: 16px; fill: #22d3ee; font-weight: bold; letter-spacing: 0.1em; text-anchor: end; }
-      .text-name { font-family: 'Orbitron', sans-serif; font-size: 32px; fill: #ffffff; font-weight: 500; letter-spacing: 0.15em; }
-      .text-id { font-family: 'Share Tech Mono', monospace; font-size: 12px; fill: rgba(255, 255, 255, 0.6); letter-spacing: 0.1em; }
-      
-      .line-ui { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
-      .corner { stroke: rgba(100, 100, 100, 0.8); stroke-width: 2; fill: none; }
-      
-      @keyframes scan {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100%); }
+      .name-text { 
+        font-family: 'Orbitron', sans-serif; 
+        font-size: 48px; 
+        fill: #ffffff; 
+        font-weight: 700; 
+        letter-spacing: 0.25em; 
+        text-anchor: middle;
       }
-      .anim-scan {
-        animation: scan 4s linear infinite;
+      .title-text { 
+        font-family: 'Share Tech Mono', monospace; 
+        font-size: 20px; 
+        fill: #22d3ee; 
+        font-weight: bold; 
+        letter-spacing: 0.3em;
+        text-anchor: middle;
       }
-      .blurred { filter: url(#glow); }
+
+      /* CRT Scanline Filter Simulation */
+      .scanlines {
+        fill: url(#scanlinePattern);
+        pointer-events: none;
+      }
+      
+      .blur-layer { filter: url(#heavy-blur); }
+
+      /* Noise Overlay */
+      .noise-layer {
+        fill: url(#noiseFilterPattern);
+        opacity: 0.08;
+        mix-blend-mode: color-dodge;
+      }
+      
+      @keyframes gridPan {
+        from { transform: translate(0px, 0px); }
+        to { transform: translate(-60px, -60px); }
+      }
+      .moving-grid {
+        animation: gridPan 5s linear infinite;
+      }
 
       
-    @keyframes drift0 {
+    @keyframes moveNode0 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-0.034433144902985546px, 30.12315342098926px); }
-      66% { transform: translate(-0.017216572451492773px, -15.06157671049463px); }
+      50% { transform: translate(23.26498066330457px, -22.220176015079396px); }
       100% { transform: translate(0px, 0px); }
     }
     .node0 {
-      animation: drift0 23.79611297570539s ease-in-out infinite both;
-      animation-delay: -16.596175475189078s;
+      animation: moveNode0 22.681978644326875s infinite ease-in-out;
+      animation-delay: -4.143432885633764s;
     }
   
-    @keyframes drift1 {
+    @keyframes moveNode1 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-7.941049853154691px, -11.454972561700902px); }
-      66% { transform: translate(-3.9705249265773457px, 5.727486280850451px); }
+      50% { transform: translate(-13.825313254793034px, 29.51940856660199px); }
       100% { transform: translate(0px, 0px); }
     }
     .node1 {
-      animation: drift1 23.249241303188462s ease-in-out infinite both;
-      animation-delay: -8.783592010199932s;
+      animation: moveNode1 28.580818969275896s infinite ease-in-out;
+      animation-delay: -2.751532077036245s;
     }
   
-    @keyframes drift2 {
+    @keyframes moveNode2 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-10.148110937702404px, -14.543261714423936px); }
-      66% { transform: translate(-5.074055468851202px, 7.271630857211968px); }
+      50% { transform: translate(14.03318506784828px, 29.246125852698313px); }
       100% { transform: translate(0px, 0px); }
     }
     .node2 {
-      animation: drift2 11.832242249634145s ease-in-out infinite both;
-      animation-delay: -8.471832670818397s;
+      animation: moveNode2 28.874410898457036s infinite ease-in-out;
+      animation-delay: -4.824882006398655s;
     }
   
-    @keyframes drift3 {
+    @keyframes moveNode3 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-13.766157545319206px, 39.41061435437109px); }
-      66% { transform: translate(-6.883078772659603px, -19.705307177185546px); }
+      50% { transform: translate(19.606289444107553px, -9.848467953950077px); }
       100% { transform: translate(0px, 0px); }
     }
     .node3 {
-      animation: drift3 20.612824356344923s ease-in-out infinite both;
-      animation-delay: -9.765341330570472s;
+      animation: moveNode3 10.521758803529778s infinite ease-in-out;
+      animation-delay: -1.3431650623549163s;
     }
   
-    @keyframes drift4 {
+    @keyframes moveNode4 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.579069631274399px, -23.886935928618954px); }
-      66% { transform: translate(4.289534815637199px, 11.943467964309477px); }
+      50% { transform: translate(16.295696410345574px, 6.679031537407583px); }
       100% { transform: translate(0px, 0px); }
     }
     .node4 {
-      animation: drift4 12.972711463826887s ease-in-out infinite both;
-      animation-delay: -18.67605919537117s;
+      animation: moveNode4 21.191992375304537s infinite ease-in-out;
+      animation-delay: -8.684588634314776s;
     }
   
-    @keyframes drift5 {
+    @keyframes moveNode5 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-28.00211681069861px, 3.5896659308367784px); }
-      66% { transform: translate(-14.001058405349305px, -1.7948329654183892px); }
+      50% { transform: translate(14.162562940183234px, -14.052428104598423px); }
       100% { transform: translate(0px, 0px); }
     }
     .node5 {
-      animation: drift5 29.26335420031874s ease-in-out infinite both;
-      animation-delay: -2.284186788106586s;
+      animation: moveNode5 18.875163886553544s infinite ease-in-out;
+      animation-delay: -15.65211770859185s;
     }
   
-    @keyframes drift6 {
+    @keyframes moveNode6 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-10.270814393853094px, -0.2917524124673321px); }
-      66% { transform: translate(-5.135407196926547px, 0.14587620623366604px); }
+      50% { transform: translate(16.549916587614895px, 17.817720945296518px); }
       100% { transform: translate(0px, 0px); }
     }
     .node6 {
-      animation: drift6 20.440782658645595s ease-in-out infinite both;
-      animation-delay: -3.4032936508879907s;
+      animation: moveNode6 17.613280198629823s infinite ease-in-out;
+      animation-delay: -7.8292577015185305s;
     }
   
-    @keyframes drift7 {
+    @keyframes moveNode7 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-18.52822531093554px, -38.60058490707041px); }
-      66% { transform: translate(-9.26411265546777px, 19.300292453535207px); }
+      50% { transform: translate(2.7316348451795647px, 8.404623345034777px); }
       100% { transform: translate(0px, 0px); }
     }
     .node7 {
-      animation: drift7 19.095132841212756s ease-in-out infinite both;
-      animation-delay: -6.819937595687787s;
+      animation: moveNode7 27.761311038772895s infinite ease-in-out;
+      animation-delay: -12.52124280443001s;
     }
   
-    @keyframes drift8 {
+    @keyframes moveNode8 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(37.30955723758122px, -9.403695419209477px); }
-      66% { transform: translate(18.65477861879061px, 4.701847709604738px); }
+      50% { transform: translate(10.42189246097751px, -12.643786686185475px); }
       100% { transform: translate(0px, 0px); }
     }
     .node8 {
-      animation: drift8 14.727906380419341s ease-in-out infinite both;
-      animation-delay: -13.374442964465079s;
+      animation: moveNode8 21.781421757470895s infinite ease-in-out;
+      animation-delay: -8.667110672133338s;
     }
   
-    @keyframes drift9 {
+    @keyframes moveNode9 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-20.163287588713708px, 29.596461780515682px); }
-      66% { transform: translate(-10.081643794356854px, -14.798230890257841px); }
+      50% { transform: translate(6.514723879152722px, 19.01625568879121px); }
       100% { transform: translate(0px, 0px); }
     }
     .node9 {
-      animation: drift9 17.260126444848012s ease-in-out infinite both;
-      animation-delay: -16.185451275257098s;
+      animation: moveNode9 12.842613296071931s infinite ease-in-out;
+      animation-delay: -18.966105054283563s;
     }
   
-    @keyframes drift10 {
+    @keyframes moveNode10 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.199491172817286px, 17.312359622819695px); }
-      66% { transform: translate(4.099745586408643px, -8.656179811409848px); }
+      50% { transform: translate(17.14330877975868px, 29.649481479396137px); }
       100% { transform: translate(0px, 0px); }
     }
     .node10 {
-      animation: drift10 20.31128569183675s ease-in-out infinite both;
-      animation-delay: -13.835591129104728s;
+      animation: moveNode10 21.723519877251906s infinite ease-in-out;
+      animation-delay: -13.008758556595598s;
     }
   
-    @keyframes drift11 {
+    @keyframes moveNode11 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(38.64437055648509px, -5.615687578086446px); }
-      66% { transform: translate(19.322185278242547px, 2.807843789043223px); }
+      50% { transform: translate(-12.025110826806634px, -26.33321160827765px); }
       100% { transform: translate(0px, 0px); }
     }
     .node11 {
-      animation: drift11 10.559801035734463s ease-in-out infinite both;
-      animation-delay: -10.346233670253271s;
+      animation: moveNode11 11.031926405886452s infinite ease-in-out;
+      animation-delay: -0.8517194582460674s;
     }
   
-    @keyframes drift12 {
+    @keyframes moveNode12 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(35.29834155424872px, 6.145107953617641px); }
-      66% { transform: translate(17.64917077712436px, -3.0725539768088206px); }
+      50% { transform: translate(-0.1451464789440582px, 22.660381015594957px); }
       100% { transform: translate(0px, 0px); }
     }
     .node12 {
-      animation: drift12 27.12684326250279s ease-in-out infinite both;
-      animation-delay: -10.813931850429412s;
+      animation: moveNode12 28.151074569737613s infinite ease-in-out;
+      animation-delay: -11.052180580356946s;
     }
   
-    @keyframes drift13 {
+    @keyframes moveNode13 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(10.815895083338871px, 20.95932636610554px); }
-      66% { transform: translate(5.407947541669436px, -10.47966318305277px); }
+      50% { transform: translate(17.92803953384833px, -17.284644839088962px); }
       100% { transform: translate(0px, 0px); }
     }
     .node13 {
-      animation: drift13 26.85289552646755s ease-in-out infinite both;
-      animation-delay: -11.018361092376011s;
+      animation: moveNode13 13.475014774746306s infinite ease-in-out;
+      animation-delay: -9.021366622886461s;
     }
   
-    @keyframes drift14 {
+    @keyframes moveNode14 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(2.046693052506434px, -26.97367346272758px); }
-      66% { transform: translate(1.023346526253217px, 13.48683673136379px); }
+      50% { transform: translate(22.151162479214655px, -13.402891904436004px); }
       100% { transform: translate(0px, 0px); }
     }
     .node14 {
-      animation: drift14 21.431265449578504s ease-in-out infinite both;
-      animation-delay: -11.093230750439513s;
+      animation: moveNode14 12.963849881096435s infinite ease-in-out;
+      animation-delay: -5.905101678013331s;
     }
   
-    @keyframes drift15 {
+    @keyframes moveNode15 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-33.059872271931965px, -13.60326608609908px); }
-      66% { transform: translate(-16.529936135965983px, 6.80163304304954px); }
+      50% { transform: translate(21.68266826078632px, 4.4683333095601px); }
       100% { transform: translate(0px, 0px); }
     }
     .node15 {
-      animation: drift15 13.43663075649288s ease-in-out infinite both;
-      animation-delay: -0.7446943787038585s;
+      animation: moveNode15 23.949022266310447s infinite ease-in-out;
+      animation-delay: -19.040784408734368s;
     }
   
-    @keyframes drift16 {
+    @keyframes moveNode16 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-23.75114634150531px, -20.88202683000503px); }
-      66% { transform: translate(-11.875573170752656px, 10.441013415002516px); }
+      50% { transform: translate(-26.61825737690652px, -1.9121721055068885px); }
       100% { transform: translate(0px, 0px); }
     }
     .node16 {
-      animation: drift16 18.38290547600588s ease-in-out infinite both;
-      animation-delay: -5.948221928097476s;
+      animation: moveNode16 16.92925722379423s infinite ease-in-out;
+      animation-delay: -16.140348631817258s;
     }
   
-    @keyframes drift17 {
+    @keyframes moveNode17 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-26.57104557184857px, -3.809350278962018px); }
-      66% { transform: translate(-13.285522785924284px, 1.904675139481009px); }
+      50% { transform: translate(-22.750161745278778px, -26.528893562667747px); }
       100% { transform: translate(0px, 0px); }
     }
     .node17 {
-      animation: drift17 22.981486312275194s ease-in-out infinite both;
-      animation-delay: -13.689764690213696s;
+      animation: moveNode17 17.477453496231952s infinite ease-in-out;
+      animation-delay: -6.288690576607436s;
     }
   
-    @keyframes drift18 {
+    @keyframes moveNode18 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.05003174380123px, -38.96773709581086px); }
-      66% { transform: translate(4.025015871900615px, 19.48386854790543px); }
+      50% { transform: translate(13.044156524992577px, 6.398749237536901px); }
       100% { transform: translate(0px, 0px); }
     }
     .node18 {
-      animation: drift18 23.84668867757429s ease-in-out infinite both;
-      animation-delay: -10.380394968063637s;
+      animation: moveNode18 29.922804421859798s infinite ease-in-out;
+      animation-delay: -6.5576701587346715s;
     }
   
-    @keyframes drift19 {
+    @keyframes moveNode19 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(17.780326531144226px, 39.21084179323901px); }
-      66% { transform: translate(8.890163265572113px, -19.605420896619506px); }
+      50% { transform: translate(-9.472517449489771px, 15.97463650021698px); }
       100% { transform: translate(0px, 0px); }
     }
     .node19 {
-      animation: drift19 17.018804813678223s ease-in-out infinite both;
-      animation-delay: -16.957548834636928s;
+      animation: moveNode19 23.368599942318674s infinite ease-in-out;
+      animation-delay: -2.534714483458238s;
     }
   
-    @keyframes drift20 {
+    @keyframes moveNode20 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-6.975697045600651px, -9.64894116078054px); }
-      66% { transform: translate(-3.4878485228003253px, 4.82447058039027px); }
+      50% { transform: translate(-16.553355092674487px, 27.39863538348915px); }
       100% { transform: translate(0px, 0px); }
     }
     .node20 {
-      animation: drift20 25.227567649986007s ease-in-out infinite both;
-      animation-delay: -0.31275905634846835s;
+      animation: moveNode20 21.518944192537152s infinite ease-in-out;
+      animation-delay: -10.05975461871076s;
     }
   
-    @keyframes drift21 {
+    @keyframes moveNode21 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-24.99787783299121px, 34.841814481235645px); }
-      66% { transform: translate(-12.498938916495606px, -17.420907240617822px); }
+      50% { transform: translate(12.425875643565387px, 13.22590699620547px); }
       100% { transform: translate(0px, 0px); }
     }
     .node21 {
-      animation: drift21 16.80729516191115s ease-in-out infinite both;
-      animation-delay: -8.360540451240382s;
+      animation: moveNode21 19.463864455806217s infinite ease-in-out;
+      animation-delay: -6.327377722515568s;
     }
   
-    @keyframes drift22 {
+    @keyframes moveNode22 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(30.14601252308716px, -12.05809573849641px); }
-      66% { transform: translate(15.07300626154358px, 6.029047869248205px); }
+      50% { transform: translate(9.99021985129772px, -27.093966273112212px); }
       100% { transform: translate(0px, 0px); }
     }
     .node22 {
-      animation: drift22 27.170780625491112s ease-in-out infinite both;
-      animation-delay: -1.7553033384573524s;
+      animation: moveNode22 12.47716599422973s infinite ease-in-out;
+      animation-delay: -6.937335237137161s;
     }
   
-    @keyframes drift23 {
+    @keyframes moveNode23 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(18.607662561372305px, 27.856246046287254px); }
-      66% { transform: translate(9.303831280686152px, -13.928123023143627px); }
+      50% { transform: translate(8.95541131049473px, -14.122547452949483px); }
       100% { transform: translate(0px, 0px); }
     }
     .node23 {
-      animation: drift23 19.269948192496543s ease-in-out infinite both;
-      animation-delay: -11.209802934610806s;
+      animation: moveNode23 18.478163565108364s infinite ease-in-out;
+      animation-delay: -0.5795005738641046s;
     }
   
-    @keyframes drift24 {
+    @keyframes moveNode24 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.87600865671879px, 10.700995245307876px); }
-      66% { transform: translate(4.438004328359395px, -5.350497622653938px); }
+      50% { transform: translate(17.537336244385394px, -4.017768151079468px); }
       100% { transform: translate(0px, 0px); }
     }
     .node24 {
-      animation: drift24 23.163706270559402s ease-in-out infinite both;
-      animation-delay: -5.279641839034344s;
+      animation: moveNode24 24.300246415793083s infinite ease-in-out;
+      animation-delay: -9.445709299446495s;
     }
   
-    @keyframes drift25 {
+    @keyframes moveNode25 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(9.283794650233546px, 39.313864419248866px); }
-      66% { transform: translate(4.641897325116773px, -19.656932209624433px); }
+      50% { transform: translate(11.446839085629502px, -20.824654357825043px); }
       100% { transform: translate(0px, 0px); }
     }
     .node25 {
-      animation: drift25 18.51926100860399s ease-in-out infinite both;
-      animation-delay: -10.188212568717276s;
+      animation: moveNode25 27.71077742101791s infinite ease-in-out;
+      animation-delay: -4.454755751156294s;
     }
   
-    @keyframes drift26 {
+    @keyframes moveNode26 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-39.84193795607033px, -25.662855518371828px); }
-      66% { transform: translate(-19.920968978035166px, 12.831427759185914px); }
+      50% { transform: translate(10.110203906998898px, 13.495549538950018px); }
       100% { transform: translate(0px, 0px); }
     }
     .node26 {
-      animation: drift26 20.83271898129864s ease-in-out infinite both;
-      animation-delay: -5.127353434555473s;
+      animation: moveNode26 11.338028941237566s infinite ease-in-out;
+      animation-delay: -12.264698038649598s;
     }
   
-    @keyframes drift27 {
+    @keyframes moveNode27 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-38.18033141757547px, -11.99483315243131px); }
-      66% { transform: translate(-19.090165708787737px, 5.997416576215655px); }
+      50% { transform: translate(-14.809462607399421px, -13.449697288779541px); }
       100% { transform: translate(0px, 0px); }
     }
     .node27 {
-      animation: drift27 23.731608274862996s ease-in-out infinite both;
-      animation-delay: -1.5162107833845084s;
+      animation: moveNode27 26.0593266390229s infinite ease-in-out;
+      animation-delay: -1.5683093574317453s;
     }
   
-    @keyframes drift28 {
+    @keyframes moveNode28 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(39.730592806326015px, -13.135687333736144px); }
-      66% { transform: translate(19.865296403163008px, 6.567843666868072px); }
+      50% { transform: translate(25.98093092978668px, -0.5473034952283884px); }
       100% { transform: translate(0px, 0px); }
     }
     .node28 {
-      animation: drift28 16.25476355532513s ease-in-out infinite both;
-      animation-delay: -1.4161779717027678s;
+      animation: moveNode28 22.823911228516316s infinite ease-in-out;
+      animation-delay: -7.084366112293219s;
     }
   
-    @keyframes drift29 {
+    @keyframes moveNode29 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-21.485966758046338px, 15.558499976558293px); }
-      66% { transform: translate(-10.742983379023169px, -7.779249988279147px); }
+      50% { transform: translate(-7.089805979637269px, 13.57047893518127px); }
       100% { transform: translate(0px, 0px); }
     }
     .node29 {
-      animation: drift29 13.67813741686289s ease-in-out infinite both;
-      animation-delay: -3.9080111388663274s;
+      animation: moveNode29 19.182671733986624s infinite ease-in-out;
+      animation-delay: -14.080721068476327s;
     }
   
-    @keyframes drift30 {
+    @keyframes moveNode30 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.59239902954501px, -19.648817440356375px); }
-      66% { transform: translate(4.296199514772505px, 9.824408720178187px); }
+      50% { transform: translate(-6.5002050411396635px, 27.38915365582531px); }
       100% { transform: translate(0px, 0px); }
     }
     .node30 {
-      animation: drift30 16.95373657520475s ease-in-out infinite both;
-      animation-delay: -9.15438515311217s;
+      animation: moveNode30 17.996213350051704s infinite ease-in-out;
+      animation-delay: -8.936187931392256s;
     }
   
-    @keyframes drift31 {
+    @keyframes moveNode31 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(30.42389238136493px, 2.900229830625358px); }
-      66% { transform: translate(15.211946190682465px, -1.450114915312679px); }
+      50% { transform: translate(0.77487511128286px, -29.014928550401265px); }
       100% { transform: translate(0px, 0px); }
     }
     .node31 {
-      animation: drift31 16.50745685528942s ease-in-out infinite both;
-      animation-delay: -0.4632922996115396s;
+      animation: moveNode31 14.507574427971687s infinite ease-in-out;
+      animation-delay: -3.512599630906603s;
     }
   
-    @keyframes drift32 {
+    @keyframes moveNode32 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-4.93825348626074px, -13.35810478703146px); }
-      66% { transform: translate(-2.46912674313037px, 6.67905239351573px); }
+      50% { transform: translate(6.709197651989549px, -22.168764795507386px); }
       100% { transform: translate(0px, 0px); }
     }
     .node32 {
-      animation: drift32 17.16717838131062s ease-in-out infinite both;
-      animation-delay: -18.911931486180727s;
+      animation: moveNode32 29.621227762227893s infinite ease-in-out;
+      animation-delay: -16.164820386605633s;
     }
   
-    @keyframes drift33 {
+    @keyframes moveNode33 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(23.485412564407948px, 32.194254674343725px); }
-      66% { transform: translate(11.742706282203974px, -16.097127337171862px); }
+      50% { transform: translate(-10.922454923704457px, -29.834117612846626px); }
       100% { transform: translate(0px, 0px); }
     }
     .node33 {
-      animation: drift33 16.01094097663116s ease-in-out infinite both;
-      animation-delay: -3.8028397722653384s;
+      animation: moveNode33 20.264710958135108s infinite ease-in-out;
+      animation-delay: -12.227442556357495s;
     }
   
-    @keyframes drift34 {
+    @keyframes moveNode34 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(20.84295596538089px, -27.78745823054562px); }
-      66% { transform: translate(10.421477982690446px, 13.89372911527281px); }
+      50% { transform: translate(-6.792701589574921px, -29.700701765903688px); }
       100% { transform: translate(0px, 0px); }
     }
     .node34 {
-      animation: drift34 10.205535656096188s ease-in-out infinite both;
-      animation-delay: -6.904209832804369s;
+      animation: moveNode34 14.30853923216754s infinite ease-in-out;
+      animation-delay: -17.652484994155753s;
     }
   
-    @keyframes drift35 {
+    @keyframes moveNode35 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-34.442486526504375px, 21.902743686945882px); }
-      66% { transform: translate(-17.221243263252187px, -10.951371843472941px); }
+      50% { transform: translate(15.66648274979811px, -24.01609519943432px); }
       100% { transform: translate(0px, 0px); }
     }
     .node35 {
-      animation: drift35 18.572563476808153s ease-in-out infinite both;
-      animation-delay: -2.121605132867843s;
+      animation: moveNode35 29.774141668039388s infinite ease-in-out;
+      animation-delay: -14.713886610913038s;
     }
   
-    @keyframes drift36 {
+    @keyframes moveNode36 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(8.362120646582527px, -33.55782042400647px); }
-      66% { transform: translate(4.1810603232912635px, 16.778910212003236px); }
+      50% { transform: translate(13.443549323219884px, -9.629359730667579px); }
       100% { transform: translate(0px, 0px); }
     }
     .node36 {
-      animation: drift36 21.867733241202554s ease-in-out infinite both;
-      animation-delay: -3.834690324751504s;
+      animation: moveNode36 14.049009945098225s infinite ease-in-out;
+      animation-delay: -11.588811738761972s;
     }
   
-    @keyframes drift37 {
+    @keyframes moveNode37 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-30.049486965143764px, 21.705070870758504px); }
-      66% { transform: translate(-15.024743482571882px, -10.852535435379252px); }
+      50% { transform: translate(-23.353684240870656px, 28.394527850889762px); }
       100% { transform: translate(0px, 0px); }
     }
     .node37 {
-      animation: drift37 25.846736584399792s ease-in-out infinite both;
-      animation-delay: -12.938553488323778s;
+      animation: moveNode37 16.19921604302536s infinite ease-in-out;
+      animation-delay: -15.123082324170396s;
     }
   
-    @keyframes drift38 {
+    @keyframes moveNode38 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(14.651288660875545px, -13.433705289220965px); }
-      66% { transform: translate(7.325644330437773px, 6.716852644610483px); }
+      50% { transform: translate(25.3711356293195px, -9.662001874506439px); }
       100% { transform: translate(0px, 0px); }
     }
     .node38 {
-      animation: drift38 13.191778242903975s ease-in-out infinite both;
-      animation-delay: -12.782220526321906s;
+      animation: moveNode38 29.130657448895935s infinite ease-in-out;
+      animation-delay: -19.850989245396047s;
     }
   
-    @keyframes drift39 {
+    @keyframes moveNode39 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-5.283543306900604px, -3.1274320469152705px); }
-      66% { transform: translate(-2.641771653450302px, 1.5637160234576353px); }
+      50% { transform: translate(-5.781725768977326px, 28.97111570724413px); }
       100% { transform: translate(0px, 0px); }
     }
     .node39 {
-      animation: drift39 27.086684111129912s ease-in-out infinite both;
-      animation-delay: -10.737595914216577s;
+      animation: moveNode39 26.542378211984435s infinite ease-in-out;
+      animation-delay: -8.915339356749865s;
     }
   
-    @keyframes drift40 {
+    @keyframes moveNode40 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(31.290631068146606px, -0.2338688962936608px); }
-      66% { transform: translate(15.645315534073303px, 0.1169344481468304px); }
+      50% { transform: translate(-5.361700491157055px, -0.6655821019749286px); }
       100% { transform: translate(0px, 0px); }
     }
     .node40 {
-      animation: drift40 17.99474236745546s ease-in-out infinite both;
-      animation-delay: -18.78984668844575s;
+      animation: moveNode40 26.82007971665678s infinite ease-in-out;
+      animation-delay: -13.796353591123058s;
     }
   
-    @keyframes drift41 {
+    @keyframes moveNode41 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-28.53235879184173px, 17.977742975086155px); }
-      66% { transform: translate(-14.266179395920865px, -8.988871487543078px); }
+      50% { transform: translate(27.904769562639178px, -20.831665052110626px); }
       100% { transform: translate(0px, 0px); }
     }
     .node41 {
-      animation: drift41 18.56671080525246s ease-in-out infinite both;
-      animation-delay: -9.11094338396415s;
+      animation: moveNode41 24.3818936499806s infinite ease-in-out;
+      animation-delay: -11.88899523714116s;
     }
   
-    @keyframes drift42 {
+    @keyframes moveNode42 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(1.7350371534401px, 9.635460477396913px); }
-      66% { transform: translate(0.86751857672005px, -4.817730238698457px); }
+      50% { transform: translate(-15.963329666636483px, 18.20468184363692px); }
       100% { transform: translate(0px, 0px); }
     }
     .node42 {
-      animation: drift42 28.13064801777802s ease-in-out infinite both;
-      animation-delay: -13.10075001294274s;
+      animation: moveNode42 17.15199155515765s infinite ease-in-out;
+      animation-delay: -17.95002806833811s;
     }
   
-    @keyframes drift43 {
+    @keyframes moveNode43 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-9.211053480086218px, 29.968065207268584px); }
-      66% { transform: translate(-4.605526740043109px, -14.984032603634292px); }
+      50% { transform: translate(28.769757447154902px, 11.667200099924877px); }
       100% { transform: translate(0px, 0px); }
     }
     .node43 {
-      animation: drift43 18.721952017215525s ease-in-out infinite both;
-      animation-delay: -10.514066730025778s;
+      animation: moveNode43 12.698591738484005s infinite ease-in-out;
+      animation-delay: -8.881385055274666s;
     }
   
-    @keyframes drift44 {
+    @keyframes moveNode44 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-30.816398844736234px, 14.280097885867944px); }
-      66% { transform: translate(-15.408199422368117px, -7.140048942933972px); }
+      50% { transform: translate(-24.11418704808102px, 2.969899836870269px); }
       100% { transform: translate(0px, 0px); }
     }
     .node44 {
-      animation: drift44 15.066869110239757s ease-in-out infinite both;
-      animation-delay: -0.12241345801911496s;
+      animation: moveNode44 24.041908141653046s infinite ease-in-out;
+      animation-delay: -13.814019111694456s;
     }
   
-    @keyframes drift45 {
+    @keyframes moveNode45 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(38.97034452499392px, 8.258839292686702px); }
-      66% { transform: translate(19.48517226249696px, -4.129419646343351px); }
+      50% { transform: translate(20.794341416105308px, 13.824074572843749px); }
       100% { transform: translate(0px, 0px); }
     }
     .node45 {
-      animation: drift45 24.00419434161099s ease-in-out infinite both;
-      animation-delay: -10.445622621099119s;
+      animation: moveNode45 20.189191998529868s infinite ease-in-out;
+      animation-delay: -11.66851920814588s;
     }
   
-    @keyframes drift46 {
+    @keyframes moveNode46 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-0.14068756165139362px, -37.95739168639962px); }
-      66% { transform: translate(-0.07034378082569681px, 18.97869584319981px); }
+      50% { transform: translate(-19.230345159526326px, 11.437411690363692px); }
       100% { transform: translate(0px, 0px); }
     }
     .node46 {
-      animation: drift46 12.55236470774827s ease-in-out infinite both;
-      animation-delay: -4.972973107568861s;
+      animation: moveNode46 19.748503882157515s infinite ease-in-out;
+      animation-delay: -1.674954532474322s;
     }
   
-    @keyframes drift47 {
+    @keyframes moveNode47 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(22.63737124196983px, -26.695788077968857px); }
-      66% { transform: translate(11.318685620984915px, 13.347894038984428px); }
+      50% { transform: translate(-26.838691668948165px, 8.818360243860583px); }
       100% { transform: translate(0px, 0px); }
     }
     .node47 {
-      animation: drift47 13.003038806579825s ease-in-out infinite both;
-      animation-delay: -16.162332911122945s;
+      animation: moveNode47 22.284594083994584s infinite ease-in-out;
+      animation-delay: -11.564249215718887s;
     }
   
-    @keyframes drift48 {
+    @keyframes moveNode48 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(-20.178838292289704px, 10.297701154464294px); }
-      66% { transform: translate(-10.089419146144852px, -5.148850577232147px); }
+      50% { transform: translate(10.06605775855281px, -28.094155303524257px); }
       100% { transform: translate(0px, 0px); }
     }
     .node48 {
-      animation: drift48 29.429989821906265s ease-in-out infinite both;
-      animation-delay: -12.597632347318399s;
+      animation: moveNode48 10.02790125582992s infinite ease-in-out;
+      animation-delay: -7.850347571324708s;
     }
   
-    @keyframes drift49 {
+    @keyframes moveNode49 {
       0% { transform: translate(0px, 0px); }
-      33% { transform: translate(33.11315334578704px, -34.152103568778955px); }
-      66% { transform: translate(16.55657667289352px, 17.076051784389477px); }
+      50% { transform: translate(10.292836200519114px, -5.879421554322308px); }
       100% { transform: translate(0px, 0px); }
     }
     .node49 {
-      animation: drift49 21.202887186270814s ease-in-out infinite both;
-      animation-delay: -3.867885287072814s;
+      animation: moveNode49 29.983458991963225s infinite ease-in-out;
+      animation-delay: -12.611251401798164s;
+    }
+  
+    @keyframes moveNode50 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(25.982323205438075px, -2.2950640239068565px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node50 {
+      animation: moveNode50 19.900412320545524s infinite ease-in-out;
+      animation-delay: -17.857463174726696s;
+    }
+  
+    @keyframes moveNode51 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(29.208368644385352px, 6.252495095399729px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node51 {
+      animation: moveNode51 17.365003158033794s infinite ease-in-out;
+      animation-delay: -15.654659765097605s;
+    }
+  
+    @keyframes moveNode52 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(1.6503046011073619px, 26.48686536751562px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node52 {
+      animation: moveNode52 27.44781651872709s infinite ease-in-out;
+      animation-delay: -12.387761331905473s;
+    }
+  
+    @keyframes moveNode53 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-13.122961469514278px, 16.51224615650991px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node53 {
+      animation: moveNode53 22.13155050969612s infinite ease-in-out;
+      animation-delay: -11.035942588707941s;
+    }
+  
+    @keyframes moveNode54 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-23.164340690976676px, 10.951796112203526px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node54 {
+      animation: moveNode54 25.708669372921776s infinite ease-in-out;
+      animation-delay: -0.596567094708853s;
+    }
+  
+    @keyframes moveNode55 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-26.50030208596886px, -8.979032733484287px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node55 {
+      animation: moveNode55 28.1391113944137s infinite ease-in-out;
+      animation-delay: -13.705942918942327s;
+    }
+  
+    @keyframes moveNode56 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-3.303574239334366px, -23.867382973221098px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node56 {
+      animation: moveNode56 12.966895831784882s infinite ease-in-out;
+      animation-delay: -9.110131965119862s;
+    }
+  
+    @keyframes moveNode57 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(16.633307814375602px, 18.02138593526648px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node57 {
+      animation: moveNode57 11.413588747532268s infinite ease-in-out;
+      animation-delay: -10.270117200319262s;
+    }
+  
+    @keyframes moveNode58 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(25.329028828299375px, -16.027534279056365px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node58 {
+      animation: moveNode58 15.720910119909156s infinite ease-in-out;
+      animation-delay: -17.175926356495342s;
+    }
+  
+    @keyframes moveNode59 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-5.911083424030538px, 12.488363003281204px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node59 {
+      animation: moveNode59 28.214011738777987s infinite ease-in-out;
+      animation-delay: -7.245273597884124s;
+    }
+  
+    @keyframes moveNode60 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(16.2598042691328px, -27.0329962348934px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node60 {
+      animation: moveNode60 26.366443864143957s infinite ease-in-out;
+      animation-delay: -3.510050635978732s;
+    }
+  
+    @keyframes moveNode61 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-25.188554143611974px, -24.900612743045297px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node61 {
+      animation: moveNode61 26.73273525591281s infinite ease-in-out;
+      animation-delay: -17.026620154374875s;
+    }
+  
+    @keyframes moveNode62 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(8.055457060162643px, -19.51505451128271px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node62 {
+      animation: moveNode62 11.242700824904574s infinite ease-in-out;
+      animation-delay: -13.309744680627912s;
+    }
+  
+    @keyframes moveNode63 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-4.2734578682479185px, 14.450035949654048px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node63 {
+      animation: moveNode63 29.843004174711353s infinite ease-in-out;
+      animation-delay: -13.002581356131397s;
+    }
+  
+    @keyframes moveNode64 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(9.367392764291818px, -26.286819720670906px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node64 {
+      animation: moveNode64 20.750325223941605s infinite ease-in-out;
+      animation-delay: -10.535442834649743s;
+    }
+  
+    @keyframes moveNode65 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-25.102707298965118px, 26.532327793931813px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node65 {
+      animation: moveNode65 27.28411250680899s infinite ease-in-out;
+      animation-delay: -18.166441363834075s;
+    }
+  
+    @keyframes moveNode66 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(19.921377332968714px, -16.878553940163325px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node66 {
+      animation: moveNode66 11.802360900433449s infinite ease-in-out;
+      animation-delay: -14.635888596352311s;
+    }
+  
+    @keyframes moveNode67 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(4.123505641843421px, 2.1638568516365386px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node67 {
+      animation: moveNode67 20.573607981055034s infinite ease-in-out;
+      animation-delay: -3.947225184323373s;
+    }
+  
+    @keyframes moveNode68 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(12.234108527523693px, 15.320767699533855px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node68 {
+      animation: moveNode68 14.87089465563223s infinite ease-in-out;
+      animation-delay: -0.7838367396712198s;
+    }
+  
+    @keyframes moveNode69 {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-3.175746238019481px, -8.030578825689947px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .node69 {
+      animation: moveNode69 15.8116302422719s infinite ease-in-out;
+      animation-delay: -4.7818021002947875s;
     }
   
     </style>
     
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <pattern id="scanlinePattern" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="2" fill="rgba(0,0,0,0.3)" />
+      <rect x="0" y="2" width="4" height="2" fill="rgba(18,16,16,0.1)" />
+    </pattern>
+
+    <!-- Noise Filter -->
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
     </filter>
-    
-    <!-- Pattern: Top Left Dot Grid Filter -->
-    <radialGradient id="grad-red" cx="0%" cy="0%" r="50%" fx="0%" fy="0%">
-      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.14" />
-      <stop offset="100%" stop-color="#ef4444" stop-opacity="0" />
-    </radialGradient>
-    <radialGradient id="grad-cyan" cx="100%" cy="100%" r="50%" fx="100%" fy="100%">
-      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.1" />
-      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0" />
-    </radialGradient>
+    <pattern id="noiseFilterPattern" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" filter="url(#noiseFilter)" />
+    </pattern>
+
+    <filter id="heavy-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+    </filter>
   </defs>
 
-  <!-- Global Base -->
-  <rect x="0.5" y="0.5" width="799" height="279" class="bg" />
-  <rect x="0" y="0" width="800" height="280" fill="url(#grad-red)" />
-  <rect x="0" y="0" width="800" height="280" fill="url(#grad-cyan)" />
+  <!-- Dark Background -->
+  <rect width="100%" height="100%" class="bg" />
 
-  <!-- Animated Network Layer -->
-  <g class="network">
-    <g class="lines-layer">
-      <!-- To create the illusion of lines moving, we just slowly pan them in a large cycle -->
-      <animateTransform attributeName="transform" type="translate" values="0,0; -20,10; 0,0" dur="20s" repeatCount="indefinite" />
-      <line x1="94.75031719930715" y1="15.311634147510018" x2="112.40988552705922" y2="20.405922815811056" stroke="rgba(255, 255, 255, 0.32648133509824606)" stroke-width="1" />
-<line x1="94.75031719930715" y1="15.311634147510018" x2="73.08854929867027" y2="111.985722395825" stroke="rgba(255, 255, 255, 0.003715021183511347)" stroke-width="1" />
-<line x1="677.5216427259808" y1="48.67170505257966" x2="726.6250279650741" y2="26.493355839762486" stroke="rgba(255, 255, 255, 0.18448121693942401)" stroke-width="1" />
-<line x1="677.5216427259808" y1="48.67170505257966" x2="759.7560745770272" y2="22.381831939714484" stroke="rgba(255, 255, 255, 0.05466169143508091)" stroke-width="1" />
-<line x1="677.5216427259808" y1="48.67170505257966" x2="652.8274559412454" y2="131.71694381969183" stroke="rgba(255, 255, 255, 0.05344404104742746)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="261.3837373912271" y2="212.61496786006018" stroke="rgba(255, 255, 255, 0.04594065399195895)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="369.0459108697665" y2="118.13466288143862" stroke="rgba(255, 255, 255, 0.05652972813007309)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="293.27654751374394" y2="114.63473968538891" stroke="rgba(255, 255, 255, 0.33745506949129583)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="302.4971163695355" y2="146.7538968442383" stroke="rgba(255, 255, 255, 0.29056864614007155)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="327.0668647725194" y2="42.9608620998688" stroke="rgba(255, 255, 255, 0.02180593922748604)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="255.6496661246385" y2="137.1354723193126" stroke="rgba(255, 255, 255, 0.2808778752278744)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.3298036045992707)" stroke-width="1" />
-<line x1="283.63117396112864" y1="126.94158898980774" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.152786064917869)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="180.0431636204313" y2="216.85079680773222" stroke="rgba(255, 255, 255, 0.07419684008318864)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="302.4971163695355" y2="146.7538968442383" stroke="rgba(255, 255, 255, 0.08943945887823697)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="308.82207686134484" y2="232.62671539740148" stroke="rgba(255, 255, 255, 0.19405375104438863)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="255.6496661246385" y2="137.1354723193126" stroke="rgba(255, 255, 255, 0.09721205254168921)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="197.60263532158905" y2="266.2453575405222" stroke="rgba(255, 255, 255, 0.06667138908288606)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="308.24301651985877" y2="268.18464597319877" stroke="rgba(255, 255, 255, 0.10924151146209748)" stroke-width="1" />
-<line x1="261.3837373912271" y1="212.61496786006018" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.03814767121863758)" stroke-width="1" />
-<line x1="548.2714011186168" y1="160.62655308708528" x2="521.1418842507342" y2="219.29897507749985" stroke="rgba(255, 255, 255, 0.1414358481859943)" stroke-width="1" />
-<line x1="548.2714011186168" y1="160.62655308708528" x2="512.1724188767902" y2="178.0560065790748" stroke="rgba(255, 255, 255, 0.23965425516465283)" stroke-width="1" />
-<line x1="548.2714011186168" y1="160.62655308708528" x2="559.0913267704428" y2="237.94464286783634" stroke="rgba(255, 255, 255, 0.08771403365619329)" stroke-width="1" />
-<line x1="548.2714011186168" y1="160.62655308708528" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.26498473974134384)" stroke-width="1" />
-<line x1="369.0459108697665" y1="118.13466288143862" x2="293.27654751374394" y2="114.63473968538891" stroke="rgba(255, 255, 255, 0.09659938336897943)" stroke-width="1" />
-<line x1="369.0459108697665" y1="118.13466288143862" x2="302.4971163695355" y2="146.7538968442383" stroke="rgba(255, 255, 255, 0.11023312537002594)" stroke-width="1" />
-<line x1="369.0459108697665" y1="118.13466288143862" x2="327.0668647725194" y2="42.9608620998688" stroke="rgba(255, 255, 255, 0.055596965514368574)" stroke-width="1" />
-<line x1="369.0459108697665" y1="118.13466288143862" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.11710372518760424)" stroke-width="1" />
-<line x1="369.0459108697665" y1="118.13466288143862" x2="439.77215758415167" y2="132.3786674769851" stroke="rgba(255, 255, 255, 0.1114146603523448)" stroke-width="1" />
-<line x1="777.0433057070212" y1="187.01955436719413" x2="723.0092973476926" y2="262.2384393519914" stroke="rgba(255, 255, 255, 0.029539643843346577)" stroke-width="1" />
-<line x1="777.0433057070212" y1="187.01955436719413" x2="679.8041166623481" y2="205.81502762238787" stroke="rgba(255, 255, 255, 0.003843875201659719)" stroke-width="1" />
-<line x1="777.0433057070212" y1="187.01955436719413" x2="777.9803181853279" y2="161.38069406475663" stroke="rgba(255, 255, 255, 0.29737609245464036)" stroke-width="1" />
-<line x1="777.0433057070212" y1="187.01955436719413" x2="783.6771221007306" y2="97.91041066273111" stroke="rgba(255, 255, 255, 0.042577068185308736)" stroke-width="1" />
-<line x1="777.0433057070212" y1="187.01955436719413" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.19436628168038506)" stroke-width="1" />
-<line x1="426.13327920461927" y1="15.396551726158624" x2="491.1304251646104" y2="7.491841849943084" stroke="rgba(255, 255, 255, 0.13809579091059931)" stroke-width="1" />
-<line x1="426.13327920461927" y1="15.396551726158624" x2="500.2054983866134" y2="57.17908009023452" stroke="rgba(255, 255, 255, 0.0598242023649493)" stroke-width="1" />
-<line x1="655.774054246348" y1="148.47234431062026" x2="679.8041166623481" y2="205.81502762238787" stroke="rgba(255, 255, 255, 0.15130332598571306)" stroke-width="1" />
-<line x1="655.774054246348" y1="148.47234431062026" x2="675.8164042774177" y2="219.85207159207098" stroke="rgba(255, 255, 255, 0.10343941565900022)" stroke-width="1" />
-<line x1="655.774054246348" y1="148.47234431062026" x2="652.8274559412454" y2="131.71694381969183" stroke="rgba(255, 255, 255, 0.3319499140711152)" stroke-width="1" />
-<line x1="655.774054246348" y1="148.47234431062026" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.09096869320075701)" stroke-width="1" />
-<line x1="655.774054246348" y1="148.47234431062026" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.09134962035160221)" stroke-width="1" />
-<line x1="112.40988552705922" y1="20.405922815811056" x2="73.08854929867027" y2="111.985722395825" stroke="rgba(255, 255, 255, 0.0013417067432002217)" stroke-width="1" />
-<line x1="183.36380388439588" y1="95.84685402342177" x2="255.6496661246385" y2="137.1354723193126" stroke="rgba(255, 255, 255, 0.06701361275633855)" stroke-width="1" />
-<line x1="183.36380388439588" y1="95.84685402342177" x2="216.34361716629388" y2="31.295772281040463" stroke="rgba(255, 255, 255, 0.11004799740038491)" stroke-width="1" />
-<line x1="183.36380388439588" y1="95.84685402342177" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.1906317224024123)" stroke-width="1" />
-<line x1="723.0092973476926" y1="262.2384393519914" x2="679.8041166623481" y2="205.81502762238787" stroke="rgba(255, 255, 255, 0.11573845763419542)" stroke-width="1" />
-<line x1="723.0092973476926" y1="262.2384393519914" x2="675.8164042774177" y2="219.85207159207098" stroke="rgba(255, 255, 255, 0.1462671222495084)" stroke-width="1" />
-<line x1="723.0092973476926" y1="262.2384393519914" x2="682.9745891093448" y2="247.00441726554232" stroke="rgba(255, 255, 255, 0.22865924978989735)" stroke-width="1" />
-<line x1="723.0092973476926" y1="262.2384393519914" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.07319292731933205)" stroke-width="1" />
-<line x1="572.344732462209" y1="42.45112781368399" x2="491.1304251646104" y2="7.491841849943084" stroke="rgba(255, 255, 255, 0.0463240944610813)" stroke-width="1" />
-<line x1="572.344732462209" y1="42.45112781368399" x2="500.2054983866134" y2="57.17908009023452" stroke="rgba(255, 255, 255, 0.10549073573080468)" stroke-width="1" />
-<line x1="521.1418842507342" y1="219.29897507749985" x2="512.1724188767902" y2="178.0560065790748" stroke="rgba(255, 255, 255, 0.2311718620771307)" stroke-width="1" />
-<line x1="521.1418842507342" y1="219.29897507749985" x2="463.48795171180006" y2="263.34487599619297" stroke="rgba(255, 255, 255, 0.10978580806739871)" stroke-width="1" />
-<line x1="521.1418842507342" y1="219.29897507749985" x2="447.76499674175125" y2="266.2311312112832" stroke="rgba(255, 255, 255, 0.0515911619979367)" stroke-width="1" />
-<line x1="521.1418842507342" y1="219.29897507749985" x2="559.0913267704428" y2="237.94464286783634" stroke="rgba(255, 255, 255, 0.23086946509140277)" stroke-width="1" />
-<line x1="521.1418842507342" y1="219.29897507749985" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.0846133172079421)" stroke-width="1" />
-<line x1="142.19501016053417" y1="272.6382694846856" x2="180.0431636204313" y2="216.85079680773222" stroke="rgba(255, 255, 255, 0.13034170280131946)" stroke-width="1" />
-<line x1="142.19501016053417" y1="272.6382694846856" x2="154.18138085411846" y2="268.1203947991119" stroke="rgba(255, 255, 255, 0.348761846391024)" stroke-width="1" />
-<line x1="142.19501016053417" y1="272.6382694846856" x2="197.60263532158905" y2="266.2453575405222" stroke="rgba(255, 255, 255, 0.17689915287964364)" stroke-width="1" />
-<line x1="293.27654751374394" y1="114.63473968538891" x2="302.4971163695355" y2="146.7538968442383" stroke="rgba(255, 255, 255, 0.2663341990413847)" stroke-width="1" />
-<line x1="293.27654751374394" y1="114.63473968538891" x2="327.0668647725194" y2="42.9608620998688" stroke="rgba(255, 255, 255, 0.08304119463645576)" stroke-width="1" />
-<line x1="293.27654751374394" y1="114.63473968538891" x2="255.6496661246385" y2="137.1354723193126" stroke="rgba(255, 255, 255, 0.2246345451517601)" stroke-width="1" />
-<line x1="293.27654751374394" y1="114.63473968538891" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.37706922645123103)" stroke-width="1" />
-<line x1="293.27654751374394" y1="114.63473968538891" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.10720408841775209)" stroke-width="1" />
-<line x1="180.0431636204313" y1="216.85079680773222" x2="154.18138085411846" y2="268.1203947991119" stroke="rgba(255, 255, 255, 0.17030791093989706)" stroke-width="1" />
-<line x1="180.0431636204313" y1="216.85079680773222" x2="197.60263532158905" y2="266.2453575405222" stroke="rgba(255, 255, 255, 0.1903085056027675)" stroke-width="1" />
-<line x1="180.0431636204313" y1="216.85079680773222" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.018500687499642378)" stroke-width="1" />
-<line x1="154.18138085411846" y1="268.1203947991119" x2="197.60263532158905" y2="266.2453575405222" stroke="rgba(255, 255, 255, 0.22615312005100885)" stroke-width="1" />
-<line x1="491.1304251646104" y1="7.491841849943084" x2="500.2054983866134" y2="57.17908009023452" stroke="rgba(255, 255, 255, 0.1979632271913969)" stroke-width="1" />
-<line x1="302.4971163695355" y1="146.7538968442383" x2="308.82207686134484" y2="232.62671539740148" stroke="rgba(255, 255, 255, 0.055578256400965656)" stroke-width="1" />
-<line x1="302.4971163695355" y1="146.7538968442383" x2="255.6496661246385" y2="137.1354723193126" stroke="rgba(255, 255, 255, 0.20870137753596688)" stroke-width="1" />
-<line x1="302.4971163695355" y1="146.7538968442383" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.2812012163419941)" stroke-width="1" />
-<line x1="302.4971163695355" y1="146.7538968442383" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.07194321789066067)" stroke-width="1" />
-<line x1="327.0668647725194" y1="42.9608620998688" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.08101283863382794)" stroke-width="1" />
-<line x1="308.82207686134484" y1="232.62671539740148" x2="308.24301651985877" y2="268.18464597319877" stroke="rgba(255, 255, 255, 0.2577494189699149)" stroke-width="1" />
-<line x1="679.8041166623481" y1="205.81502762238787" x2="675.8164042774177" y2="219.85207159207098" stroke="rgba(255, 255, 255, 0.3416300826148615)" stroke-width="1" />
-<line x1="679.8041166623481" y1="205.81502762238787" x2="682.9745891093448" y2="247.00441726554232" stroke="rgba(255, 255, 255, 0.23475508045508864)" stroke-width="1" />
-<line x1="679.8041166623481" y1="205.81502762238787" x2="652.8274559412454" y2="131.71694381969183" stroke="rgba(255, 255, 255, 0.08457606313045046)" stroke-width="1" />
-<line x1="679.8041166623481" y1="205.81502762238787" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.18933451327966197)" stroke-width="1" />
-<line x1="67.66680601835411" y1="131.61664873627717" x2="72.46120283033139" y2="152.02795366300117" stroke="rgba(255, 255, 255, 0.31613271344774246)" stroke-width="1" />
-<line x1="67.66680601835411" y1="131.61664873627717" x2="73.08854929867027" y2="111.985722395825" stroke="rgba(255, 255, 255, 0.31853652900280643)" stroke-width="1" />
-<line x1="67.66680601835411" y1="131.61664873627717" x2="26.814240722857186" y2="98.35127226652529" stroke="rgba(255, 255, 255, 0.18926728349315433)" stroke-width="1" />
-<line x1="67.66680601835411" y1="131.61664873627717" x2="22.14288087180325" y2="133.526502258169" stroke="rgba(255, 255, 255, 0.21774412267479115)" stroke-width="1" />
-<line x1="777.9803181853279" y1="161.38069406475663" x2="789.1274503424617" y2="82.75628419749442" stroke="rgba(255, 255, 255, 0.08235727284122892)" stroke-width="1" />
-<line x1="777.9803181853279" y1="161.38069406475663" x2="783.6771221007306" y2="97.91041066273111" stroke="rgba(255, 255, 255, 0.14509827933153585)" stroke-width="1" />
-<line x1="777.9803181853279" y1="161.38069406475663" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.17847462938277286)" stroke-width="1" />
-<line x1="726.6250279650741" y1="26.493355839762486" x2="789.1274503424617" y2="82.75628419749442" stroke="rgba(255, 255, 255, 0.06361760068805893)" stroke-width="1" />
-<line x1="726.6250279650741" y1="26.493355839762486" x2="759.7560745770272" y2="22.381831939714484" stroke="rgba(255, 255, 255, 0.26645924197405035)" stroke-width="1" />
-<line x1="726.6250279650741" y1="26.493355839762486" x2="783.6771221007306" y2="97.91041066273111" stroke="rgba(255, 255, 255, 0.03436986634358008)" stroke-width="1" />
-<line x1="512.1724188767902" y1="178.0560065790748" x2="463.48795171180006" y2="263.34487599619297" stroke="rgba(255, 255, 255, 0.007177015141135357)" stroke-width="1" />
-<line x1="512.1724188767902" y1="178.0560065790748" x2="439.77215758415167" y2="132.3786674769851" stroke="rgba(255, 255, 255, 0.05757997388728278)" stroke-width="1" />
-<line x1="512.1724188767902" y1="178.0560065790748" x2="559.0913267704428" y2="237.94464286783634" stroke="rgba(255, 255, 255, 0.0956835154130325)" stroke-width="1" />
-<line x1="512.1724188767902" y1="178.0560065790748" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.1211957524352933)" stroke-width="1" />
-<line x1="675.8164042774177" y1="219.85207159207098" x2="682.9745891093448" y2="247.00441726554232" stroke="rgba(255, 255, 255, 0.2876797802238826)" stroke-width="1" />
-<line x1="675.8164042774177" y1="219.85207159207098" x2="652.8274559412454" y2="131.71694381969183" stroke="rgba(255, 255, 255, 0.03566405627647878)" stroke-width="1" />
-<line x1="675.8164042774177" y1="219.85207159207098" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.1450172256866467)" stroke-width="1" />
-<line x1="463.48795171180006" y1="263.34487599619297" x2="447.76499674175125" y2="266.2311312112832" stroke="rgba(255, 255, 255, 0.33605730288368274)" stroke-width="1" />
-<line x1="463.48795171180006" y1="263.34487599619297" x2="559.0913267704428" y2="237.94464286783634" stroke="rgba(255, 255, 255, 0.004319782337739131)" stroke-width="1" />
-<line x1="255.6496661246385" y1="137.1354723193126" x2="298.32621140805423" y2="117.34853187088444" stroke="rgba(255, 255, 255, 0.21183791966978777)" stroke-width="1" />
-<line x1="255.6496661246385" y1="137.1354723193126" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.2632112836602604)" stroke-width="1" />
-<line x1="789.1274503424617" y1="82.75628419749442" x2="759.7560745770272" y2="22.381831939714484" stroke="rgba(255, 255, 255, 0.1314408162127)" stroke-width="1" />
-<line x1="789.1274503424617" y1="82.75628419749442" x2="783.6771221007306" y2="97.91041066273111" stroke="rgba(255, 255, 255, 0.33558216062400126)" stroke-width="1" />
-<line x1="759.7560745770272" y1="22.381831939714484" x2="783.6771221007306" y2="97.91041066273111" stroke="rgba(255, 255, 255, 0.08309540316239793)" stroke-width="1" />
-<line x1="298.32621140805423" y1="117.34853187088444" x2="221.97371566860173" y2="131.1875804028714" stroke="rgba(255, 255, 255, 0.08961384386764149)" stroke-width="1" />
-<line x1="500.2054983866134" y1="57.17908009023452" x2="439.77215758415167" y2="132.3786674769851" stroke="rgba(255, 255, 255, 0.014105369331284524)" stroke-width="1" />
-<line x1="682.9745891093448" y1="247.00441726554232" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.08339373726754401)" stroke-width="1" />
-<line x1="72.46120283033139" y1="152.02795366300117" x2="73.08854929867027" y2="111.985722395825" stroke="rgba(255, 255, 255, 0.23981141871180164)" stroke-width="1" />
-<line x1="72.46120283033139" y1="152.02795366300117" x2="26.814240722857186" y2="98.35127226652529" stroke="rgba(255, 255, 255, 0.11815376460545118)" stroke-width="1" />
-<line x1="72.46120283033139" y1="152.02795366300117" x2="22.14288087180325" y2="133.526502258169" stroke="rgba(255, 255, 255, 0.18555234750429328)" stroke-width="1" />
-<line x1="73.08854929867027" y1="111.985722395825" x2="26.814240722857186" y2="98.35127226652529" stroke="rgba(255, 255, 255, 0.20703534564079648)" stroke-width="1" />
-<line x1="73.08854929867027" y1="111.985722395825" x2="22.14288087180325" y2="133.526502258169" stroke="rgba(255, 255, 255, 0.17875022879873562)" stroke-width="1" />
-<line x1="26.814240722857186" y1="98.35127226652529" x2="22.14288087180325" y2="133.526502258169" stroke="rgba(255, 255, 255, 0.25806376598919817)" stroke-width="1" />
-<line x1="559.0913267704428" y1="237.94464286783634" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.10728954376702791)" stroke-width="1" />
-<line x1="652.8274559412454" y1="131.71694381969183" x2="726.038169704041" y2="180.5928341158205" stroke="rgba(255, 255, 255, 0.047894078166306336)" stroke-width="1" />
-<line x1="652.8274559412454" y1="131.71694381969183" x2="581.1698565923708" y2="168.177159609807" stroke="rgba(255, 255, 255, 0.07840002786304621)" stroke-width="1" />
-    </g>
-    <g class="nodes-layer">
-      
+  <!-- Moving Grid -->
+  <g class="moving-grid">
+    <line x1="0" y1="-50" x2="0" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="60" y1="-50" x2="60" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="120" y1="-50" x2="120" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="180" y1="-50" x2="180" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="240" y1="-50" x2="240" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="300" y1="-50" x2="300" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="360" y1="-50" x2="360" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="420" y1="-50" x2="420" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="480" y1="-50" x2="480" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="540" y1="-50" x2="540" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="600" y1="-50" x2="600" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="660" y1="-50" x2="660" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="720" y1="-50" x2="720" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="780" y1="-50" x2="780" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="840" y1="-50" x2="840" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="0" x2="850" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="60" x2="850" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="120" x2="850" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="180" x2="850" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="240" x2="850" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="300" x2="850" y2="300" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+  </g>
+
+  <!-- Static connecting edges -->
+  <g>
+    <line x1="543.0308609899128" y1="263.16933958923624" x2="554.0552730977478" y2="273.16083550041327" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="288.84490717295563" y1="237.30897231156143" x2="293.6146088276003" y2="175.75673278695075" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="670.8793910202041" y1="263.7528722414478" x2="597.6829600160374" y2="327.6859535038931" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="397.45250386194925" y1="163.6084852656545" x2="376.82992344262675" y2="90.61666927920518" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="234.05209380013616" y1="174.48776651215366" x2="303.0935866406793" y2="109.55437378869433" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="271.57780606839685" y1="183.10154982690773" x2="218.88158714163106" y2="112.24698477425086" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="716.0008207390641" y1="268.06388202610066" x2="699.2361283884062" y2="199.3307670519107" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="195.43260013532287" y1="166.07565156145915" x2="247.5615012115817" y2="213.9617123870803" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="445.4064875047848" y1="232.30900674141145" x2="435.4836590224109" y2="289.01810004451227" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="790.3130960622088" y1="251.01145180389685" x2="810.8593308248226" y2="252.74365399987542" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="295.54553011985723" y1="15.702923530034433" x2="278.0135605489182" y2="-23.1986501341408" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="215.27072020887329" y1="257.75838858966546" x2="188.585833799037" y2="199.54012364772754" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="487.76329262842904" y1="81.400287375935" x2="441.05567854951744" y2="120.69872145696745" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="554.0695436612148" y1="76.28696693513125" x2="547.4712648028418" y2="86.33372842894664" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="639.4515190389538" y1="252.06126754429582" x2="681.2846979397727" y2="191.1707817104223" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="318.8301777340109" y1="261.01053217141396" x2="385.67532318468193" y2="206.0469955073089" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="364.0992777952183" y1="121.4820936955789" x2="374.5862955616891" y2="149.90575420915204" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="152.9595440570529" y1="92.75405319768421" x2="119.13165153958707" y2="133.13136318910864" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="419.37360935565107" y1="196.02618033476097" x2="469.78740449702235" y2="217.19001903694345" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="553.6305201208074" y1="91.39025179802066" x2="572.6659654740121" y2="66.85289675920963" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="490.0234619810489" y1="93.26130086736482" x2="472.202626689803" y2="71.80517434940377" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="521.901094154463" y1="47.40441744103356" x2="568.9144668316941" y2="5.203949838211663" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="589.7937161814551" y1="11.211421621078834" x2="605.0047592498754" y2="34.766352889641745" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="442.6660285821276" y1="162.7639286382065" x2="479.91850811026666" y2="200.8518136917153" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="699.2361669695164" y1="105.48891289005628" x2="688.8507577363788" y2="34.490679953361436" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="309.4356580028143" y1="141.5377485940515" x2="331.1503443785652" y2="185.74888470917827" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="739.9469862505347" y1="225.3263825967123" x2="779.0258216819411" y2="291.44920033982305" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="590.2292783244671" y1="161.78837834844393" x2="532.2586626252207" y2="235.62695397494383" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="717.7266145947854" y1="195.40886698309868" x2="771.4757506218452" y2="264.9620805256252" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="607.1086821282349" y1="88.09408544206707" x2="590.9031501132171" y2="36.41346228875976" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="485.5909202137794" y1="81.84018964721253" x2="524.325023836858" y2="155.86358774864468" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="707.391726254681" y1="108.89716858383365" x2="640.6659219581566" y2="55.7534578075123" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="762.4729010043188" y1="24.45078504102877" x2="756.2464847675418" y2="-18.3601795025094" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="90.89826295163945" y1="254.3728701741926" x2="92.26589393499137" y2="297.3052668010411" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="16.49344501777561" y1="251.38356277350246" x2="71.49027742039266" y2="250.58616408709764" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="111.09213864418317" y1="88.17218005425319" x2="168.9388499634245" y2="27.799887069636014" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="692.6986842982905" y1="131.59606060805197" x2="714.9502366418208" y2="179.11545326960118" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="391.81032534898065" y1="239.22521709029223" x2="323.2481755207133" y2="233.0415030348742" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="188.026071953671" y1="118.7065602974235" x2="118.01101720826755" y2="117.17457369063098" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+<line x1="60.073986221906495" y1="94.9996115921941" x2="68.67398506878054" y2="119.06502464283382" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+  </g>
+
+  <!-- Animated floating nodes -->
+  <g>
+    
       <g class="node0">
-        <rect x="93.25031719930715" y="13.811634147510018" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="72.47690983850546" y="270.320122760508" width="4" height="4" fill="#ffffff" opacity="0.5072619508335321">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.350294527682888s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node1">
-        <rect x="667.5216427259808" y="38.67170505257966" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="675.5216427259808" y="46.67170505257966" width="4" height="4" fill="#ff003c" />
-        <text x="692.5216427259808" y="43.67170505257966" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0xDB2C</text>
-        <text x="692.5216427259808" y="55.67170505257966" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[677,48]</text>
+        <rect x="457.808410337474" y="219.37900770452893" width="4" height="4" fill="#ffffff" opacity="0.9742595511477334">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.774790417779048s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node2">
-        <rect x="282.13117396112864" y="125.44158898980774" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="211.19802923452605" y="144.91785466748212" width="4" height="4" fill="#ffffff" opacity="0.4930271080877049">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.1443155479774845s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node3">
-        <rect x="259.8837373912271" y="211.11496786006018" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="613.2273665352378" y="251.22149196564715" width="4" height="4" fill="#ffffff" opacity="0.6093261428343422">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.249833176289208s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node4">
-        <rect x="546.7714011186168" y="159.12655308708528" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="531.4721848454013" y="19.700664429072148" width="4" height="4" fill="#ffffff" opacity="0.775056742511279">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1160511052159423s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node5">
-        <rect x="367.5459108697665" y="116.63466288143862" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="557.4696145134247" y="242.23060312281453" width="4" height="4" fill="#ffffff" opacity="0.5793883675404354">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.6841122727366584s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node6">
-        <rect x="775.5433057070212" y="185.51955436719413" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="171.76619506406064" y="271.91782339983456" width="4" height="4" fill="#ffffff" opacity="0.7030922984153896">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.0516335471540907s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node7">
-        <rect x="424.63327920461927" y="13.896551726158624" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="79.78903625723652" y="184.84583603238895" width="4" height="4" fill="#00f0ff" opacity="0.5817701792985116">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5755379318319673s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node8">
-        <rect x="654.274054246348" y="146.97234431062026" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="78.49434621471754" y="165.4570601502218" width="4" height="4" fill="#ffffff" opacity="0.7417086253323484">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5075575690892968s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node9">
-        <rect x="110.90988552705922" y="18.905922815811056" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="414.91544053260924" y="125.58128631103239" width="4" height="4" fill="#ffffff" opacity="0.9175426370363627">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.625338461256562s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node10">
-        <rect x="181.86380388439588" y="94.34685402342177" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="206.4250920977949" y="211.137434179598" width="4" height="4" fill="#ffffff" opacity="0.7527337461775951">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.005613175247254s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node11">
-        <rect x="721.5092973476926" y="260.7384393519914" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="416.1146695494045" y="120.07398606912682" width="4" height="4" fill="#ffffff" opacity="0.7841223447175046">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.8695514062068415s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node12">
-        <rect x="570.844732462209" y="40.95112781368399" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="28.094372707155248" y="133.5325254440496" width="4" height="4" fill="#ffffff" opacity="0.6411265663819694">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.167279208658655s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node13">
-        <rect x="519.6418842507342" y="217.79897507749985" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="143.73420908341427" y="131.58653290354817" width="4" height="4" fill="#00f0ff" opacity="0.6091330709995307">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7231491788441042s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node14">
-        <rect x="140.69501016053417" y="271.1382694846856" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="277.05619061201537" y="134.7218575966979" width="4" height="4" fill="#00f0ff" opacity="0.7112528231705468">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.384250508446851s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node15">
-        <rect x="291.77654751374394" y="113.13473968538891" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="323.3821520699453" y="7.885261816573255" width="4" height="4" fill="#ffffff" opacity="0.40771337864870594">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.859796147322s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node16">
-        <rect x="178.5431636204313" y="215.35079680773222" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="305.1116048920671" y="154.67762134361504" width="4" height="4" fill="#ffffff" opacity="0.7021438773123894">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.7369820011336636s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node17">
-        <rect x="152.68138085411846" y="266.6203947991119" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="42.484720726735546" y="219.69904330736895" width="4" height="4" fill="#ffffff" opacity="0.6255975895513237">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.5124803152219095s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node18">
-        <rect x="489.6304251646104" y="5.991841849943084" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="110.35396960636388" y="233.16227352018305" width="4" height="4" fill="#ffffff" opacity="0.4767299951112173">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.715736860651541s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node19">
-        <rect x="300.9971163695355" y="145.2538968442383" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="788.5850633949891" y="196.2183779274623" width="4" height="4" fill="#00f0ff" opacity="0.5387705980166757">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.075528557838514s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node20">
-        <rect x="325.5668647725194" y="41.4608620998688" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="94.79561436763464" y="15.500058399165084" width="4" height="4" fill="#ffffff" opacity="0.7913367391184494">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.217969780011475s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node21">
-        <rect x="307.32207686134484" y="231.12671539740148" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="194.48810824784223" y="242.41979188524843" width="4" height="4" fill="#ffffff" opacity="0.9127746464838487">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.656227145885732s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node22">
-        <rect x="678.3041166623481" y="204.31502762238787" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="4.842634946320558" y="86.05737884107444" width="4" height="4" fill="#00f0ff" opacity="0.6537470418018636">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7558414749058548s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node23">
-        <rect x="66.16680601835411" y="130.11664873627717" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="590.4891060753524" y="37.897436859002255" width="4" height="4" fill="#ffffff" opacity="0.8057634782163123">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.0089392688484349s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node24">
-        <rect x="776.4803181853279" y="159.88069406475663" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="360.0121830072462" y="252.4053757294602" width="4" height="4" fill="#ffffff" opacity="0.6707581009808548">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.2336905710032022s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node25">
-        <rect x="725.1250279650741" y="24.993355839762486" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="355.4057337878794" y="238.3625470626511" width="4" height="4" fill="#00f0ff" opacity="0.4892911340690009">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.499972335901757s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node26">
-        <rect x="510.6724188767902" y="176.5560065790748" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="678.4866314498651" y="144.7657464833445" width="4" height="4" fill="#00f0ff" opacity="0.5929829014400367">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.167110104276546s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node27">
-        <rect x="674.3164042774177" y="218.35207159207098" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="237.40959613173547" y="-8.831049206081879" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
+        <rect x="245.40959613173547" y="-0.8310492060818779" width="4" height="4" fill="#ff003c" />
+        <text x="262.4095961317355" y="-3.831049206081878" class="mono font-10" fill="#ff003c">ID:247</text>
       </g>
     
       <g class="node28">
-        <rect x="461.98795171180006" y="261.84487599619297" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="384.2038220621844" y="277.540326245292" width="4" height="4" fill="#ffffff" opacity="0.749255139943179">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.297568150002061s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node29">
-        <rect x="254.1496661246385" y="135.6354723193126" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="417.06509790291074" y="173.01419418425422" width="4" height="4" fill="#ffffff" opacity="0.6123808913029182">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.2073865959125714s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node30">
-        <rect x="196.10263532158905" y="264.7453575405222" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="581.7113884566336" y="183.80697144006206" width="4" height="4" fill="#ffffff" opacity="0.715977662788172">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.449222085982979s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node31">
-        <rect x="787.6274503424617" y="81.25628419749442" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="473.5907436069317" y="137.9887384258696" width="4" height="4" fill="#ffffff" opacity="0.9822204408181273">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8393400951225867s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node32">
-        <rect x="749.7560745770272" y="12.381831939714484" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="757.7560745770272" y="20.381831939714484" width="4" height="4" fill="#ff003c" />
-        <text x="774.7560745770272" y="17.381831939714484" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0xB825</text>
-        <text x="774.7560745770272" y="29.381831939714484" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[759,22]</text>
+        <rect x="461.78974354096084" y="236.10717926008923" width="4" height="4" fill="#ffffff" opacity="0.7394837814082514">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7890206913519189s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node33">
-        <rect x="288.32621140805423" y="107.34853187088444" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="296.32621140805423" y="115.34853187088444" width="4" height="4" fill="#ff003c" />
-        <text x="313.32621140805423" y="112.34853187088444" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0x93B8</text>
-        <text x="313.32621140805423" y="124.34853187088444" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[298,117]</text>
+        <rect x="72.18210662483106" y="94.47664237882985" width="4" height="4" fill="#ffffff" opacity="0.4148032630174033">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1892622130089179s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node34">
-        <rect x="498.7054983866134" y="55.67908009023452" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="449.22847783239905" y="154.73643308566525" width="4" height="4" fill="#ffffff" opacity="0.7265983269411747">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.829522481070931s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node35">
-        <rect x="306.74301651985877" y="266.68464597319877" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="461.71730340734257" y="99.11985638624168" width="4" height="4" fill="#ffffff" opacity="0.4020617545877647">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.2338373233823634s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node36">
-        <rect x="446.26499674175125" y="264.7311312112832" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="661.013338115144" y="-0.8325254780913998" width="4" height="4" fill="#ffffff" opacity="0.8563791904728827">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4140114125104795s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node37">
-        <rect x="438.27215758415167" y="130.8786674769851" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="30.647293950694767" y="99.68157225881444" width="4" height="4" fill="#ffffff" opacity="0.8309846945058221">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1726942155758757s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node38">
-        <rect x="214.84361716629388" y="29.795772281040463" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="569.5709744848097" y="138.32621638186487" width="4" height="4" fill="#ffffff" opacity="0.7916180554393344">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.4788873973295478s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node39">
-        <rect x="681.4745891093448" y="245.50441726554232" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="252.36800669378235" y="15.544540835426254" width="4" height="4" fill="#ffffff" opacity="0.8943143616855693">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1477490400305435s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node40">
-        <rect x="62.46120283033139" y="142.02795366300117" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="70.46120283033139" y="150.02795366300117" width="4" height="4" fill="#ff003c" />
-        <text x="87.46120283033139" y="147.02795366300117" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0x02E8</text>
-        <text x="87.46120283033139" y="159.02795366300117" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[72,152]</text>
+        <rect x="341.7377644899216" y="265.5506691983198" width="4" height="4" fill="#00f0ff" opacity="0.6783886651911599">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.37593817036918s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node41">
-        <rect x="71.58854929867027" y="110.485722395825" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="432.8776372259204" y="262.395372567082" width="4" height="4" fill="#ffffff" opacity="0.6171757411375156">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.707813640690583s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node42">
-        <rect x="16.814240722857186" y="88.35127226652529" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="24.814240722857186" y="96.35127226652529" width="4" height="4" fill="#ff003c" />
-        <text x="41.814240722857186" y="93.35127226652529" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0x3DFD</text>
-        <text x="41.814240722857186" y="105.35127226652529" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[26,98]</text>
+        <rect x="758.6034511560612" y="7.568423789905648" width="4" height="4" fill="#ffffff" opacity="0.7261986539626293">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.25200361430693s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node43">
-        <rect x="549.0913267704428" y="227.94464286783634" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="557.0913267704428" y="235.94464286783634" width="4" height="4" fill="#ff003c" />
-        <text x="574.0913267704428" y="232.94464286783634" font-family="'Share Tech Mono', monospace" font-size="10" fill="#ff003c">ID:0x0F54</text>
-        <text x="574.0913267704428" y="244.94464286783634" font-family="'Share Tech Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">[559,237]</text>
+        <rect x="707.7120295745534" y="144.77946299288925" width="4" height="4" fill="#ffffff" opacity="0.504919472635867">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7597285096972426s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node44">
-        <rect x="20.64288087180325" y="132.026502258169" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="648.3252729920387" y="140.3854041869059" width="4" height="4" fill="#00f0ff" opacity="0.4183269680648813">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8076605767218887s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node45">
-        <rect x="220.47371566860173" y="129.6875804028714" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="557.0830979772434" y="234.0612123187843" width="4" height="4" fill="#ffffff" opacity="0.6565481044353265">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1573454944485602s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node46">
-        <rect x="651.3274559412454" y="130.21694381969183" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="286.90430793924963" y="156.12997957426052" width="4" height="4" fill="#ffffff" opacity="0.8052572940592932">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.29980115253239s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node47">
-        <rect x="782.1771221007306" y="96.41041066273111" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="231.75264484527287" y="199.00066930996482" width="4" height="4" fill="#00f0ff" opacity="0.741250305363176">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5581005679238997s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node48">
-        <rect x="724.538169704041" y="179.0928341158205" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="441.8850581835701" y="212.7983540924826" width="4" height="4" fill="#00f0ff" opacity="0.7506639491833358">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1956201105485815s" repeatCount="indefinite" />
+        </rect>
       </g>
     
       <g class="node49">
-        <rect x="579.6698565923708" y="166.677159609807" width="3" height="3" fill="rgba(255, 255, 255, 0.8)" />
+        <rect x="704.3284304612699" y="143.3278409849127" width="4" height="4" fill="#ffffff" opacity="0.7016632171816353">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.838157434127262s" repeatCount="indefinite" />
+        </rect>
       </g>
     
-    </g>
-  </g>
-
-  <!-- Scanlines (Fake overlay) -->
-  <g opacity="0.1" pointer-events="none">
-    <rect x="0" y="0" width="800" height="280" fill="url(#scanlines)" />
-  </g>
-
-  <!-- Dim overlay to push background back slightly -->
-  <rect x="0" y="0" width="800" height="280" fill="black" opacity="0.4" />
-
-  <!-- The Actual ID Card HUD Element -->
-  <g transform="translate(40, 45)">
-    <!-- Blur Backdrop -->
-    <rect x="-20" y="-20" width="740" height="200" fill="rgba(0,0,0,0.6)" class="blurred" />
-    <rect x="-20" y="-20" width="740" height="200" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
-
-    <!-- Corners on the card -->
-    <path d="M -10 -10 L -15 -10 L -15 -5" class="corner" />
-    <path d="M 710 -10 L 715 -10 L 715 -5" class="corner" />
-    <path d="M -10 170 L -15 170 L -15 165" class="corner" />
-    <path d="M 710 170 L 715 170 L 715 165" class="corner" />
-    
-    <!-- Card Info structure mimicking portfolio ID Card -->
-    <!-- Top Row -->
-    <text x="0" y="10" class="text-label">DEPT ID</text>
-    <text x="0" y="32" class="text-dept">DIGITAL ARCHITECT</text>
-
-    <!-- Class -->
-    <text x="700" y="10" class="text-label" text-anchor="end">CLASS</text>
-    <text x="700" y="32" class="text-class">1337_Rabat</text>
-
-    <!-- Separator -->
-    <line x1="0" y1="50" x2="700" y2="50" class="line-ui" />
-
-    <!-- Name Center -->
-    <g transform="translate(0, 95)">
-      <text x="0" y="10" class="text-label">FULL NAME</text>
-      <text x="0" y="45" class="text-name">MOURTADA BOUIZAKARNE</text>
-    </g>
-
-    <!-- Bottom Row (Footer Data) -->
-    <g transform="translate(0, 160)">
-      <line x1="0" y1="-10" x2="700" y2="-10" class="line-ui" />
-
-      <!-- Barcode-like visual -->
-      <g transform="translate(0, -2)">
-        <rect x="0" y="0" width="30" height="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <line x1="5" y1="6" x2="25" y2="6" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
-        <line x1="5" y1="12" x2="20" y2="12" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
-        <line x1="5" y1="18" x2="15" y2="18" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
-        <line x1="5" y1="24" x2="25" y2="24" stroke="rgba(255,255,255,0.8)" stroke-width="2" />
+      <g class="node50">
+        <rect x="543.6171429380088" y="87.80438286747177" width="4" height="4" fill="#ffffff" opacity="0.5636670983975048">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4811409378113316s" repeatCount="indefinite" />
+        </rect>
       </g>
-
-      <!-- Serial Number Elements -->
-      <text x="45" y="18" class="text-id">7524129823004A</text>
-
-      <circle cx="695" cy="12" r="5" fill="#22d3ee" class="blurred" />
-      <circle cx="695" cy="12" r="3" fill="#22d3ee" />
-    </g>
+    
+      <g class="node51">
+        <rect x="288.02784769947255" y="79.43672403173241" width="4" height="4" fill="#ffffff" opacity="0.49537780741346116">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.4881911038479405s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node52">
+        <rect x="456.78958038941494" y="98.29135131060934" width="4" height="4" fill="#ffffff" opacity="0.879743609538762">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.0231348348746716s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node53">
+        <rect x="453.0343859324405" y="234.55518995476416" width="4" height="4" fill="#ffffff" opacity="0.5640433275077384">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.35705593258343s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node54">
+        <rect x="641.2743057283787" y="173.61043184690874" width="4" height="4" fill="#ffffff" opacity="0.7282880496315729">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4089713045758425s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node55">
+        <rect x="293.859972582723" y="115.17585623239793" width="4" height="4" fill="#ffffff" opacity="0.5073315584553623">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.6136555438271052s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node56">
+        <rect x="608.556397945391" y="114.88981207516963" width="4" height="4" fill="#ffffff" opacity="0.4132862331435185">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.997808633551935s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node57">
+        <rect x="327.8251890969248" y="90.7419287453183" width="4" height="4" fill="#ffffff" opacity="0.7989407203997041">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.246430013641846s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node58">
+        <rect x="466.5858590144079" y="168.82319254119696" width="4" height="4" fill="#ffffff" opacity="0.8856941817415485">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.9364105060042243s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node59">
+        <rect x="511.94044333821114" y="105.03250780541492" width="4" height="4" fill="#ffffff" opacity="0.5892733227054033">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.1841282553516232s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node60">
+        <rect x="281.3860099522847" y="270.2678502075699" width="4" height="4" fill="#00f0ff" opacity="0.9918612033861445">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.195179798477822s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node61">
+        <rect x="760.7948477128332" y="0.5997024057565987" width="4" height="4" fill="#ffffff" opacity="0.7507848176407419">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.394975117399649s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node62">
+        <rect x="30.329836852617966" y="48.95625062381005" width="4" height="4" fill="#ffffff" opacity="0.7366377814794689">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.194316072150623s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node63">
+        <rect x="421.2070059870526" y="176.86718480063053" width="4" height="4" fill="#ffffff" opacity="0.6515038178764574">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.9267497117555896s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node64">
+        <rect x="457.5163352713115" y="97.0610519242579" width="4" height="4" fill="#00f0ff" opacity="0.7040936343923547">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8252521481763533s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node65">
+        <rect x="489.6387107879564" y="186.71442151738123" width="4" height="4" fill="#ffffff" opacity="0.6598290608852464">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.589783384175303s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node66">
+        <rect x="209.61107479943863" y="274.19585384776394" width="4" height="4" fill="#ffffff" opacity="0.8151612047891099">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.2438077478458798s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node67">
+        <rect x="235.356751448091" y="4.293079794415748" width="4" height="4" fill="#ffffff" opacity="0.5093974393749351">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.6314785519422292s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
+      <g class="node68">
+        <rect x="22.36618678310812" y="241.8545244251004" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
+        <rect x="30.36618678310812" y="249.8545244251004" width="4" height="4" fill="#ff003c" />
+        <text x="47.36618678310812" y="246.8545244251004" class="mono font-10" fill="#ff003c">ID:32</text>
+      </g>
+    
+      <g class="node69">
+        <rect x="470.3603618194747" y="168.55123157220757" width="4" height="4" fill="#ffffff" opacity="0.5592744410721278">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.990500372357493s" repeatCount="indefinite" />
+        </rect>
+      </g>
+    
   </g>
 
-  <!-- Definitions layer for overlay -->
-  <defs>
-    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="4" y2="0" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
-    </pattern>
-  </defs>
+  <!-- Vignette -->
+  <rect width="100%" height="100%" fill="none" stroke="#000" stroke-width="40" opacity="0.6" />
 
+  <!-- Name and Title -->
+  <!-- Shadow/glow for Name -->
+  <text x="400" y="145" class="name-text blur-layer" fill="rgba(255,255,255,0.4)">MOURTADA BOUIZAKARNE</text>
+  <text x="400" y="145" class="name-text blur-layer" fill="none" stroke="#ff003c" stroke-width="4" opacity="0.6">MOURTADA BOUIZAKARNE</text>
+  <text x="400" y="145" class="name-text">MOURTADA BOUIZAKARNE</text>
+  
+  <text x="400" y="180" class="title-text">DIGITAL ARCHITECT</text>
+
+  <!-- Overlays -->
+  <!-- Noise -->
+  <rect width="100%" height="100%" class="noise-layer" pointer-events="none" />
+  
+  <!-- Scanlines -->
+  <rect width="100%" height="100%" class="scanlines" />
+
+  <!-- Inset Shadow -->
+  <rect width="100%" height="100%" fill="none" stroke="rgba(0,0,0,0.8)" stroke-width="10" pointer-events="none" />
+  <rect width="100%" height="100%" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="20" pointer-events="none" />
 </svg>
