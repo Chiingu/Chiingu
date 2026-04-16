@@ -1,5 +1,5 @@
 
-<svg width="800" height="240" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="350" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
   
   <defs>
     <style>
@@ -20,145 +20,427 @@
   .corner { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; fill: none; }
   
   @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-  .anim-scan { animation: scan 4s linear infinite; }
+  .anim-scan { animation: scan 6s linear infinite; }
+  
+  @keyframes pulseRed { 0% { opacity: 0.8; filter: drop-shadow(0 0 4px #ef4444); } 50% { opacity: 1; filter: drop-shadow(0 0 10px #ef4444); } 100% { opacity: 0.8; filter: drop-shadow(0 0 4px #ef4444); } }
+  .glow-red { animation: pulseRed 3s infinite; }
+  
+  @keyframes pulseCyan { 0% { opacity: 0.8; filter: drop-shadow(0 0 4px #22d3ee); } 50% { opacity: 1; filter: drop-shadow(0 0 10px #22d3ee); } 100% { opacity: 0.8; filter: drop-shadow(0 0 4px #22d3ee); } }
+  .glow-cyan { animation: pulseCyan 3s infinite; }
+  
+  @keyframes glitch { 
+    0% { transform: translate(0) } 
+    20% { transform: translate(-2px, 1px) } 
+    40% { transform: translate(-1px, -1px) } 
+    60% { transform: translate(2px, 1px) } 
+    80% { transform: translate(1px, -1px) } 
+    100% { transform: translate(0) } 
+  }
 </style>
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="4" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
     <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="4" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+      <line x1="0" y1="0" x2="4" y2="0" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
     </pattern>
+    <radialGradient id="folderGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   
-  <rect x="0.5" y="0.5" width="799" height="239" class="bg" />
+  <rect x="0.5" y="0.5" width="799" height="349" class="bg" />
   
   <text x="30" y="30" class="title">&gt; TECHNICAL_ARSENAL</text>
   <line x1="30" y1="45" x2="770" y2="45" class="line-ui" />
-  <circle cx="20" cy="25" r="3" fill="#ef4444" filter="url(#glow)" />
+  <circle cx="20" cy="25" r="3" fill="#ef4444">
+    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Animated network points overlay -->
+  <circle cx="101.52299185851783" cy="286.39714170287493" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.8018195664423104s" repeatCount="indefinite" begin="0.15400351859431138s"/>
+  </circle><circle cx="591.2311811300492" cy="225.84247772971216" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.230999550425827s" repeatCount="indefinite" begin="1.5350006209997349s"/>
+  </circle><circle cx="368.0641154558715" cy="265.2924363402284" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="5.395612462392845s" repeatCount="indefinite" begin="1.4527100891220626s"/>
+  </circle><circle cx="396.9613874592873" cy="86.71010988968823" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.6382218375493385s" repeatCount="indefinite" begin="1.318040108287659s"/>
+  </circle><circle cx="692.218463708493" cy="249.8989759786104" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="4.482858983766509s" repeatCount="indefinite" begin="0.1026609833013461s"/>
+  </circle><circle cx="552.5006287269973" cy="58.660339392455754" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="4.054106374689507s" repeatCount="indefinite" begin="0.3475968016662654s"/>
+  </circle><circle cx="452.7730864139108" cy="154.7978049220855" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.2800596583994794s" repeatCount="indefinite" begin="1.7841736961989063s"/>
+  </circle><circle cx="691.6436878578761" cy="233.90252119591156" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="4.969370361808503s" repeatCount="indefinite" begin="1.289656794897851s"/>
+  </circle><circle cx="441.5435939921309" cy="228.50638953707895" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="5.377512930622813s" repeatCount="indefinite" begin="0.22916184711472942s"/>
+  </circle><circle cx="316.6279028365518" cy="171.09325020326116" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.4107930620096s" repeatCount="indefinite" begin="0.0046325038508143734s"/>
+  </circle><circle cx="480.53006916474095" cy="161.77446888114304" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.2523982525901074s" repeatCount="indefinite" begin="1.6819281476607622s"/>
+  </circle><circle cx="108.31989186404928" cy="222.93135517009668" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="2.405261835954603s" repeatCount="indefinite" begin="1.2520873628058091s"/>
+  </circle><circle cx="276.52732962145745" cy="122.30766503126625" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="5.735290017593961s" repeatCount="indefinite" begin="1.8624823795415848s"/>
+  </circle><circle cx="690.8433668747914" cy="230.2603801353073" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="3.2263474669138312s" repeatCount="indefinite" begin="0.7993518269905311s"/>
+  </circle><circle cx="534.3606878521402" cy="120.20031205323926" r="1.5" fill="rgba(255,255,255,0.4)">
+    <animate attributeName="opacity" values="0;1;0" dur="2.6394652544828134s" repeatCount="indefinite" begin="0.29535705852364225s"/>
+  </circle>
 
   
-      <g transform="translate(30, 70)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_0" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(30, 80)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="30,80; 30,78; 30,80" dur="3s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">C/C++</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="121.5" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="121.5" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">C/C++</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_0)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="121.5" dur="1.5s" begin="0s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">90%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#ef4444" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1s" fill="freeze" />
+          90%
+        </text>
       </g>
     
-      <g transform="translate(215, 70)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(215, 80)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="215,80; 215,78; 215,80" dur="4s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">DOCKER</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="114.75" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="114.75" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">DOCKER</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_1)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="114.75" dur="1.5s" begin="0.1s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">85%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#ef4444" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.1s" fill="freeze" />
+          85%
+        </text>
       </g>
     
-      <g transform="translate(400, 70)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(400, 80)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="400,80; 400,78; 400,80" dur="5s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">BASH</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="108" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="108" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">BASH</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_2)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="108" dur="1.5s" begin="0.2s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">80%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#ef4444" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.2s" fill="freeze" />
+          80%
+        </text>
       </g>
     
-      <g transform="translate(585, 70)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(585, 80)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="585,80; 585,78; 585,80" dur="6s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">REACT</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="101.25" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="101.25" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">REACT</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_3)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="101.25" dur="1.5s" begin="0.30000000000000004s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">75%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#22d3ee" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.3s" fill="freeze" />
+          75%
+        </text>
       </g>
     
-      <g transform="translate(30, 150)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(30, 160)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="30,160; 30,158; 30,160" dur="3s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">POSTGRES</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="94.5" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="94.5" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">POSTGRES</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_4)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="94.5" dur="1.5s" begin="0.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">70%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#22d3ee" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.4s" fill="freeze" />
+          70%
+        </text>
       </g>
     
-      <g transform="translate(215, 150)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_5" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(215, 160)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="215,160; 215,158; 215,160" dur="4s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">GO</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="87.75" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="87.75" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">GO</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_5)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="87.75" dur="1.5s" begin="0.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">65%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#22d3ee" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" fill="freeze" />
+          65%
+        </text>
       </g>
     
-      <g transform="translate(400, 150)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_6" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(400, 160)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="400,160; 400,158; 400,160" dur="5s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">RUST</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="81" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="81" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">RUST</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_6)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="81" dur="1.5s" begin="0.6000000000000001s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">60%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#a855f7" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.6s" fill="freeze" />
+          60%
+        </text>
       </g>
     
-      <g transform="translate(585, 150)">
-        <rect x="0" y="0" width="175" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="6" />
+      <defs>
+        <linearGradient id="grad_7" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(585, 160)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="585,160; 585,158; 585,160" dur="6s" repeatCount="indefinite" />
         
-        <text x="87.5" y="25" class="mono font-14 font-bold text-dim" text-anchor="middle">ASM</text>
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         
-        <!-- Progress Bar Background -->
-        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.1)" rx="3" />
-        <!-- Progress Bar Fill -->
-        <rect x="20" y="35" width="67.5" height="6" fill="#ef4444" rx="3">
-          <animate attributeName="width" from="0" to="67.5" dur="1.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">ASM</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_7)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="67.5" dur="1.5s" begin="0.7000000000000001s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
         </rect>
         
-        <text x="87.5" y="55" class="mono font-12 text-red" text-anchor="middle">50%</text>
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#a855f7" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.7000000000000002s" fill="freeze" />
+          50%
+        </text>
+      </g>
+    
+      <defs>
+        <linearGradient id="grad_8" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(30, 240)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="30,240; 30,238; 30,240" dur="3s" repeatCount="indefinite" />
+        
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
+        
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">TYPESCRIPT</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_8)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="114.75" dur="1.5s" begin="0.8s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        </rect>
+        
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#ef4444" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.8s" fill="freeze" />
+          85%
+        </text>
+      </g>
+    
+      <defs>
+        <linearGradient id="grad_9" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(215, 240)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="215,240; 215,238; 215,240" dur="4s" repeatCount="indefinite" />
+        
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
+        
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">PYTHON</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_9)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="101.25" dur="1.5s" begin="0.9s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        </rect>
+        
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#22d3ee" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.9s" fill="freeze" />
+          75%
+        </text>
+      </g>
+    
+      <defs>
+        <linearGradient id="grad_10" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(400, 240)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="400,240; 400,238; 400,240" dur="5s" repeatCount="indefinite" />
+        
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
+        
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">KUBERNETES</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_10)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="81" dur="1.5s" begin="1s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        </rect>
+        
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#a855f7" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="2s" fill="freeze" />
+          60%
+        </text>
+      </g>
+    
+      <defs>
+        <linearGradient id="grad_11" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(585, 240)">
+        <!-- Floating animation for the card -->
+        <animateTransform attributeName="transform" type="translate" values="585,240; 585,238; 585,240" dur="6s" repeatCount="indefinite" />
+        
+        <rect x="0" y="0" width="175" height="70" fill="rgba(20,20,20,0.8)" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
+        
+        <text x="87.5" y="25" class="mono font-14 font-bold text-white" text-anchor="middle" style="letter-spacing: 0.1em;">GIT</text>
+        
+        <!-- Progress Bar Background (Dim) -->
+        <rect x="20" y="35" width="135" height="6" fill="rgba(255,255,255,0.08)" rx="3" />
+        <!-- Progress Bar Fill with Gradient -->
+        <rect x="20" y="35" width="0" height="6" fill="url(#grad_11)" rx="3">
+          <!-- Elegant loading animation -->
+          <animate attributeName="width" from="0" to="128.25" dur="1.5s" begin="1.1s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.16 1 0.3 1" />
+        </rect>
+        
+        <!-- Animated Number counter -->
+        <text x="87.5" y="55" class="mono font-12" fill="#ef4444" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.1s" fill="freeze" />
+          95%
+        </text>
       </g>
     
 
-  <rect x="0" y="0" width="800" height="240" fill="url(#scanlines)" opacity="0.4" pointer-events="none" />
+  <rect x="0" y="0" width="800" height="350" fill="url(#scanlines)" opacity="0.4" pointer-events="none" />
 </svg>
   

@@ -20,44 +20,77 @@
   .corner { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; fill: none; }
   
   @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-  .anim-scan { animation: scan 4s linear infinite; }
+  .anim-scan { animation: scan 6s linear infinite; }
+  
+  @keyframes pulseRed { 0% { opacity: 0.8; filter: drop-shadow(0 0 4px #ef4444); } 50% { opacity: 1; filter: drop-shadow(0 0 10px #ef4444); } 100% { opacity: 0.8; filter: drop-shadow(0 0 4px #ef4444); } }
+  .glow-red { animation: pulseRed 3s infinite; }
+  
+  @keyframes pulseCyan { 0% { opacity: 0.8; filter: drop-shadow(0 0 4px #22d3ee); } 50% { opacity: 1; filter: drop-shadow(0 0 10px #22d3ee); } 100% { opacity: 0.8; filter: drop-shadow(0 0 4px #22d3ee); } }
+  .glow-cyan { animation: pulseCyan 3s infinite; }
+  
+  @keyframes glitch { 
+    0% { transform: translate(0) } 
+    20% { transform: translate(-2px, 1px) } 
+    40% { transform: translate(-1px, -1px) } 
+    60% { transform: translate(2px, 1px) } 
+    80% { transform: translate(1px, -1px) } 
+    100% { transform: translate(0) } 
+  }
 </style>
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="4" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
     <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="4" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+      <line x1="0" y1="0" x2="4" y2="0" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
     </pattern>
+    <radialGradient id="folderGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
   </defs>
   
   <rect x="0.5" y="0.5" width="799" height="489" class="bg" />
   
   <text x="30" y="30" class="title">&gt; SYSTEM_BREACHES</text>
   <line x1="30" y1="45" x2="770" y2="45" class="line-ui" />
-  <circle cx="20" cy="25" r="3" fill="#22d3ee" filter="url(#glow)" />
+  <circle cx="20" cy="25" r="3" fill="#22d3ee">
+    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Ambient light -->
+  <circle cx="400" cy="245" r="300" fill="#22d3ee" opacity="0.02" filter="url(#glow)" />
 
   
+      <!-- Hover effect simulation group -->
       <g transform="translate(30, 80)">
+        <animateTransform attributeName="transform" type="translate" values="30,80; 30,77; 30,80" dur="4s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 01</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 01</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">MINISHELL</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">MINISHELL</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            A robust Unix shell implementation in C. Features piping & signals.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">A robust Unix shell implementation in C. </tspan><tspan x="15" dy="16">Features piping & signals. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
@@ -71,26 +104,35 @@
       
       </g>
     
+      <!-- Hover effect simulation group -->
       <g transform="translate(410, 80)">
+        <animateTransform attributeName="transform" type="translate" values="410,80; 410,77; 410,80" dur="5s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 02</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 02</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="6s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">INCEPTION</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">INCEPTION</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            Infrastructure as Code. A complex Docker system with Nginx, MariaDB.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">Infrastructure as Code. A complex Docker </tspan><tspan x="15" dy="16">system with Nginx, MariaDB. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
@@ -104,26 +146,35 @@
       
       </g>
     
+      <!-- Hover effect simulation group -->
       <g transform="translate(30, 210)">
+        <animateTransform attributeName="transform" type="translate" values="30,210; 30,207; 30,210" dur="6s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 03</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 03</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="7s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">CUB3D</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">CUB3D</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            First-person 3D engine based on raycasting built entirely in C.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">First-person 3D engine based on raycasting </tspan><tspan x="15" dy="16">built entirely in C. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
@@ -137,26 +188,35 @@
       
       </g>
     
+      <!-- Hover effect simulation group -->
       <g transform="translate(410, 210)">
+        <animateTransform attributeName="transform" type="translate" values="410,210; 410,207; 410,210" dur="4s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 04</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 04</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="8s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">PHILOSOPHERS</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">PHILOSOPHERS</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            Solved dining philosophers problem via multithreading and mutexes.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">Solved dining philosophers problem via </tspan><tspan x="15" dy="16">multithreading and mutexes. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
@@ -170,26 +230,35 @@
       
       </g>
     
+      <!-- Hover effect simulation group -->
       <g transform="translate(30, 340)">
+        <animateTransform attributeName="transform" type="translate" values="30,340; 30,337; 30,340" dur="5s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 05</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 05</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="9s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="9s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">MINITALK</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">MINITALK</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            Client-server communication using UNIX signals across processes.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">Client-server communication using UNIX signals </tspan><tspan x="15" dy="16">across processes. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
@@ -203,26 +272,35 @@
       
       </g>
     
+      <!-- Hover effect simulation group -->
       <g transform="translate(410, 340)">
+        <animateTransform attributeName="transform" type="translate" values="410,340; 410,337; 410,340" dur="6s" repeatCount="indefinite" />
+        
         <!-- Folder Tab -->
         <path d="M 0 0 L 80 0 L 95 15 L 0 15 Z" fill="#000" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
-        <text x="10" y="11" class="mono" font-size="10" fill="rgba(255,255,255,0.5)">DIR // 06</text>
+        <text x="10" y="11" class="mono font-bold" font-size="10" fill="rgba(255,255,255,0.6)">DIR // 06</text>
         
         <!-- Main Folder Box -->
-        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="6" />
+        <rect x="0" y="14" width="360" height="100" fill="#0a0a0a" stroke="rgba(255,255,255,0.15)" stroke-width="1" rx="4" />
         <!-- Top lip for 3d effect -->
-        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.05)" />
+        <rect x="1" y="15" width="358" height="2" fill="rgba(255,255,255,0.08)" rx="1"/>
 
-        <!-- Halo glow effect backing -->
-        <circle cx="180" cy="15" r="40" fill="#22d3ee" opacity="0.05" filter="url(#glow)" />
+        <!-- Animated Halo glow effect inside box -->
+        <circle cx="180" cy="50" r="40" fill="url(#folderGlow)">
+          <animate attributeName="r" values="30;60;30" dur="10s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="10s" repeatCount="indefinite"/>
+        </circle>
 
-        <text x="15" y="40" class="mono font-16 font-bold text-white">BORN2BEROOT</text>
+        <!-- Icon indicator -->
+        <rect x="15" y="25" width="20" height="20" fill="rgba(255,255,255,0.05)" rx="4"/>
+        <text x="25" y="40" class="mono font-14 font-bold text-dim" text-anchor="middle">_</text>
+
+        <text x="45" y="40" class="mono font-16 font-bold text-white" style="letter-spacing: 0.1em;">BORN2BEROOT</text>
         
-        <foreignObject x="15" y="50" width="330" height="30">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Share Tech Mono', monospace; font-size:12px; color:rgba(255,255,255,0.6); line-height:1.2;">
-            SysAdmin & virtualization. Secure Debian server with LVM/UFW policies.
-          </div>
-        </foreignObject>
+        <!-- Pure SVG Text replacing foreignObject -->
+        <text y="58" class="mono font-12 text-dim">
+          <tspan x="15" dy="0">SysAdmin & virtualization. Secure Debian </tspan><tspan x="15" dy="16">server with strict LVM/UFW policies. </tspan>
+        </text>
 
         
         <rect x="15" y="70" width="60" height="18" fill="rgba(255,255,255,0.05)" stroke="#ef4444" stroke-width="1" rx="4" />
