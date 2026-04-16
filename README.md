@@ -33,136 +33,25 @@
 
 ---
 
-## `> DOSSIER_RECORDS`
+<div align="center">
 
-<table>
-<tr>
-<td width="50%">
+<img src="dossier.svg" width="100%" alt="DOSSIER RECORDS"/>
 
-```yaml
-AGENT_ID    : MOURTADA BOUIZAKARNE
-DEPT_ID     : DIGITAL ARCHITECT
-CLASS       : 1337_Rabat (42 Network)
-STATUS      : ████████████ ACTIVE
-CLEARANCE   : LEVEL-04 // LOW_LEVEL_SYS
-NODE        : 109.30.81.31
-SERIAL      : 7524129823004A
-```
+</div>
 
-</td>
-<td width="50%">
-
-```
-Phase 01 ── AUTOMATION  [2018–2020]
-         └── IFIMIA Casablanca
-             PLC Logic · Robotic Arms
-
-Phase 02 ── PRECISION   [2020–2022]
-         └── Dental Tech · 10μm Accuracy
-             CAD/CAM · Material Science
-
-Phase 03 ── STRATEGY    [2022–2023]
-         └── Pro-Gamer · KIC Seoul
-             Represented Morocco 🇲🇦
-
-Phase 04 ── SOFTWARE    [PRESENT ██]
-         └── 1337 (42 Network)
-             Low-Level · Systems Arch.
-```
-
-</td>
-</tr>
-</table>
-
----
-
-## `> SYSTEM_BREACHES` — Projects
-
-<table>
-<tr>
-<td width="50%">
-
-### `DIR // 01 · MINISHELL`
-> A robust Unix shell implementation in C. Features command piping, redirections, and signal handling. Engineered for stability and memory efficiency.
-
-![C](https://img.shields.io/badge/C-ef4444?style=flat-square&logo=c&logoColor=white)
-![POSIX](https://img.shields.io/badge/POSIX-030507?style=flat-square&logoColor=22d3ee)
-![KERNEL](https://img.shields.io/badge/KERNEL-030507?style=flat-square&logoColor=white)
-
-</td>
-<td width="50%">
-
-### `DIR // 02 · INCEPTION`
-> Infrastructure as Code. A complex Docker-based system with Nginx, MariaDB, and WordPress, orchestrated with security-first TLS/SSL configurations.
-
-![Docker](https://img.shields.io/badge/DOCKER-ef4444?style=flat-square&logo=docker&logoColor=white)
-![Linux](https://img.shields.io/badge/LINUX-030507?style=flat-square&logo=linux&logoColor=22d3ee)
-![DevOps](https://img.shields.io/badge/DEVOPS-030507?style=flat-square&logoColor=white)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### `DIR // 03 · CUB3D`
-> First-person 3D engine based on raycasting. Built entirely in C, featuring texture mapping, sprite rendering, and collision detection.
-
-![C](https://img.shields.io/badge/C-ef4444?style=flat-square&logo=c&logoColor=white)
-![Math](https://img.shields.io/badge/MATH-030507?style=flat-square&logoColor=22d3ee)
-![Algorithms](https://img.shields.io/badge/ALGORITHMS-030507?style=flat-square&logoColor=white)
-
-</td>
-<td width="50%">
-
-### `DIR // 04 · PHILOSOPHERS`
-> Solved the dining philosophers problem. Implemented multithreading and mutexes to prevent data races and deadlocks.
-
-![C](https://img.shields.io/badge/C-ef4444?style=flat-square&logo=c&logoColor=white)
-![Threads](https://img.shields.io/badge/THREADS-030507?style=flat-square&logoColor=22d3ee)
-![Concurrency](https://img.shields.io/badge/CONCURRENCY-030507?style=flat-square&logoColor=white)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### `DIR // 05 · MINITALK`
-> Client-server communication using UNIX signals (SIGUSR1/SIGUSR2) to transmit strings reliably across processes.
-
-![C](https://img.shields.io/badge/C-ef4444?style=flat-square&logo=c&logoColor=white)
-![POSIX](https://img.shields.io/badge/POSIX-030507?style=flat-square&logoColor=22d3ee)
-![Signals](https://img.shields.io/badge/SIGNALS-030507?style=flat-square&logoColor=white)
-
-</td>
-<td width="50%">
-
-### `DIR // 06 · BORN2BEROOT`
-> System administration & virtualization. Configured a secure Debian server with strict LVM, UFW, SSH, and password policies.
-
-![Linux](https://img.shields.io/badge/LINUX-ef4444?style=flat-square&logo=linux&logoColor=white)
-![SysAdmin](https://img.shields.io/badge/SYSADMIN-030507?style=flat-square&logoColor=22d3ee)
-![Security](https://img.shields.io/badge/SECURITY-030507?style=flat-square&logoColor=white)
-
-</td>
-</tr>
-</table>
-
----
-
-## `> TECHNICAL_ARSENAL`
+<br>
 
 <div align="center">
 
-| SYSTEM | PROFICIENCY | LEVEL |
-|:------:|:-----------:|:-----:|
-| `C / C++` | `▓▓▓▓▓▓▓▓▓░` | `90%` |
-| `DOCKER` | `▓▓▓▓▓▓▓▓░░` | `85%` |
-| `BASH` | `▓▓▓▓▓▓▓▓░░` | `80%` |
-| `REACT` | `▓▓▓▓▓▓▓░░░` | `75%` |
-| `POSTGRES` | `▓▓▓▓▓▓▓░░░` | `70%` |
-| `GO` | `▓▓▓▓▓▓░░░░` | `65%` |
-| `RUST` | `▓▓▓▓▓▓░░░░` | `60%` |
-| `ASM` | `▓▓▓▓▓░░░░░` | `50%` |
+<img src="breaches.svg" width="100%" alt="SYSTEM BREACHES (PROJECTS)"/>
+
+</div>
+
+<br>
+
+<div align="center">
+
+<img src="arsenal.svg" width="100%" alt="TECHNICAL ARSENAL"/>
 
 </div>
 
@@ -172,15 +61,15 @@ Phase 04 ── SOFTWARE    [PRESENT ██]
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Chiingu&show_icons=true&theme=transparent&title_color=ef4444&icon_color=22d3ee&text_color=ffffff&border_color=ffffff30&hide_border=false&include_all_commits=true&count_private=true&custom_title=SYSTEM_METRICS" width="49%" alt="GitHub Stats"/>
+<img src="https://github-readme-stats.vercel.app/api?username=Chiingu&show_icons=true&theme=transparent&title_color=ef4444&icon_color=22d3ee&text_color=ffffff&bg_color=030507&hide_border=true&include_all_commits=true&count_private=true&custom_title=SYSTEM_METRICS" width="49%" alt="GitHub Stats"/>
 
-<img src="https://github-readme-streak-stats.herokuapp.com?user=Chiingu&theme=transparent&hide_border=false&border=ffffff30&stroke=ffffff30&ring=ef4444&fire=ef4444&currStreakLabel=22d3ee&sideLabels=22d3ee&sideNums=ffffff&currStreakNum=ffffff&dates=ffffff60" width="49%" alt="Streak Stats"/>
+<img src="https://github-readme-streak-stats.herokuapp.com?user=Chiingu&theme=transparent&hide_border=true&background=030507&ring=ef4444&fire=ef4444&currStreakLabel=22d3ee&sideLabels=22d3ee&sideNums=ffffff&currStreakNum=ffffff&dates=ffffff60" width="49%" alt="Streak Stats"/>
 
 </div>
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Chiingu&layout=compact&theme=transparent&title_color=ef4444&text_color=ffffff&border_color=ffffff30&hide_border=false&langs_count=8&custom_title=LANGUAGE_DISTRIBUTION" width="49%" alt="Top Languages"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Chiingu&layout=compact&theme=transparent&title_color=ef4444&text_color=ffffff&bg_color=030507&hide_border=true&langs_count=8&custom_title=LANGUAGE_DISTRIBUTION" width="49%" alt="Top Languages"/>
 
 </div>
 
@@ -190,7 +79,7 @@ Phase 04 ── SOFTWARE    [PRESENT ██]
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Chiingu&bg_color=030507&color=22d3ee&line=ef4444&point=ffffff&area=true&area_color=ef444420&hide_border=false&border_color=ffffff30&title_color=ffffff&custom_title=COMMIT_ACTIVITY_GRAPH" width="100%" alt="Activity Graph"/>
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Chiingu&bg_color=030507&color=22d3ee&line=ef4444&point=ffffff&area=true&area_color=ef444420&hide_border=true&title_color=ffffff&custom_title=COMMIT_ACTIVITY_GRAPH" width="100%" alt="Activity Graph"/>
 
 </div>
 
