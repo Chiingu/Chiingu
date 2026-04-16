@@ -2,1270 +2,1181 @@
 <svg width="800" height="280" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Orbitron:wght@500;700&amp;display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Orbitron:wght@500;700;900&amp;display=swap');
       
-      .bg { fill: #000000; }
+      .bg { fill: #050505; }
       .mono { font-family: 'Share Tech Mono', monospace; }
-      .orbitron { font-family: 'Orbitron', sans-serif; }
       .font-10 { font-size: 10px; }
+      .font-12 { font-size: 12px; }
       
+      /* Base Title styles */
       .name-text { 
         font-family: 'Orbitron', sans-serif; 
-        font-size: 48px; 
-        fill: #ffffff; 
-        font-weight: 700; 
-        letter-spacing: 0.25em; 
+        font-size: 46px; 
+        font-weight: 900; 
+        letter-spacing: 0.15em; 
         text-anchor: middle;
       }
       .title-text { 
         font-family: 'Share Tech Mono', monospace; 
-        font-size: 20px; 
+        font-size: 22px; 
         fill: #22d3ee; 
         font-weight: bold; 
-        letter-spacing: 0.3em;
+        letter-spacing: 0.4em;
         text-anchor: middle;
+        text-shadow: 0px 0px 8px rgba(34,211,238,0.6);
       }
 
-      /* CRT Scanline Filter Simulation */
-      .scanlines {
-        fill: url(#scanlinePattern);
-        pointer-events: none;
+      /* Glitch Animations */
+      @keyframes glitch-anim-1 {
+        0%, 10%, 20%, 30%, 40%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        5% { clip-path: inset(10% 0 60% 0); transform: translate(-4px, 2px); }
+        15% { clip-path: inset(40% 0 20% 0); transform: translate(4px, -2px); }
+        25% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 2px); }
+        35% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, -2px); }
       }
-      
-      .blur-layer { filter: url(#heavy-blur); }
 
-      /* Noise Overlay */
-      .noise-layer {
-        fill: url(#noiseFilterPattern);
-        opacity: 0.08;
-        mix-blend-mode: color-dodge;
+      @keyframes glitch-anim-2 {
+        0%, 10%, 20%, 30%, 40%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        5% { clip-path: inset(60% 0 10% 0); transform: translate(4px, -2px); }
+        15% { clip-path: inset(20% 0 40% 0); transform: translate(-4px, 2px); }
+        25% { clip-path: inset(5% 0 80% 0); transform: translate(-2px, -2px); }
+        35% { clip-path: inset(80% 0 20% 0); transform: translate(2px, 2px); }
       }
-      
-      @keyframes gridPan {
-        from { transform: translate(0px, 0px); }
-        to { transform: translate(-60px, -60px); }
+
+      .glitch-layer-1 {
+        fill: #00f0ff;
+        animation: glitch-anim-1 4s infinite linear alternate-reverse;
+      }
+      .glitch-layer-2 {
+        fill: #ff003c;
+        animation: glitch-anim-2 4s infinite linear alternate-reverse;
+      }
+      .glitch-base {
+        fill: #ffffff;
+      }
+
+      /* Grid pan */
+      @keyframes gridPanX {
+        0% { transform: translateX(0px); }
+        100% { transform: translateX(-40px); }
       }
       .moving-grid {
-        animation: gridPan 5s linear infinite;
+        animation: gridPanX 3s linear infinite;
+      }
+
+      /* Scanline sweep */
+      @keyframes sweep {
+        0% { transform: translateY(-50px); }
+        100% { transform: translateY(350px); }
+      }
+      .sweep-line {
+        animation: sweep 6s ease-in-out infinite;
+      }
+
+      /* Vignette breathe */
+      @keyframes breathe {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 0.95; }
+      }
+      .vignette {
+        animation: breathe 5s infinite;
       }
 
       
-    @keyframes moveNode0 {
+    @keyframes driftNode0 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(23.26498066330457px, -22.220176015079396px); }
+      33% { transform: translate(23.689584711273184px, 25.508673986221446px); }
+      66% { transform: translate(11.844792355636592px, -12.754336993110723px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node0 {
-      animation: moveNode0 22.681978644326875s infinite ease-in-out;
-      animation-delay: -4.143432885633764s;
+    .node-anim-0 {
+      animation: driftNode0 8.553922752363672s infinite ease-in-out;
     }
   
-    @keyframes moveNode1 {
+    @keyframes driftNode1 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-13.825313254793034px, 29.51940856660199px); }
+      33% { transform: translate(-19.20266984283498px, -23.136042823048257px); }
+      66% { transform: translate(-9.60133492141749px, 11.568021411524128px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node1 {
-      animation: moveNode1 28.580818969275896s infinite ease-in-out;
-      animation-delay: -2.751532077036245s;
+    .node-anim-1 {
+      animation: driftNode1 13.608703618102808s infinite ease-in-out;
     }
   
-    @keyframes moveNode2 {
+    @keyframes driftNode2 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(14.03318506784828px, 29.246125852698313px); }
+      33% { transform: translate(19.164670047109638px, -30.00422002758766px); }
+      66% { transform: translate(9.582335023554819px, 15.00211001379383px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node2 {
-      animation: moveNode2 28.874410898457036s infinite ease-in-out;
-      animation-delay: -4.824882006398655s;
+    .node-anim-2 {
+      animation: driftNode2 12.916887936902638s infinite ease-in-out;
     }
   
-    @keyframes moveNode3 {
+    @keyframes driftNode3 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(19.606289444107553px, -9.848467953950077px); }
+      33% { transform: translate(-23.3419848630852px, 12.21925083768486px); }
+      66% { transform: translate(-11.6709924315426px, -6.10962541884243px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node3 {
-      animation: moveNode3 10.521758803529778s infinite ease-in-out;
-      animation-delay: -1.3431650623549163s;
+    .node-anim-3 {
+      animation: driftNode3 18.374321425460984s infinite ease-in-out;
     }
   
-    @keyframes moveNode4 {
+    @keyframes driftNode4 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(16.295696410345574px, 6.679031537407583px); }
+      33% { transform: translate(-14.041448063847861px, 5.795925056333502px); }
+      66% { transform: translate(-7.020724031923931px, -2.897962528166751px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node4 {
-      animation: moveNode4 21.191992375304537s infinite ease-in-out;
-      animation-delay: -8.684588634314776s;
+    .node-anim-4 {
+      animation: driftNode4 9.939533105059036s infinite ease-in-out;
     }
   
-    @keyframes moveNode5 {
+    @keyframes driftNode5 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(14.162562940183234px, -14.052428104598423px); }
+      33% { transform: translate(35.61655101935679px, -6.93244472715822px); }
+      66% { transform: translate(17.808275509678396px, 3.46622236357911px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node5 {
-      animation: moveNode5 18.875163886553544s infinite ease-in-out;
-      animation-delay: -15.65211770859185s;
+    .node-anim-5 {
+      animation: driftNode5 16.382795164787012s infinite ease-in-out;
     }
   
-    @keyframes moveNode6 {
+    @keyframes driftNode6 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(16.549916587614895px, 17.817720945296518px); }
+      33% { transform: translate(2.8808421689244046px, 2.808882990354906px); }
+      66% { transform: translate(1.4404210844622023px, -1.404441495177453px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node6 {
-      animation: moveNode6 17.613280198629823s infinite ease-in-out;
-      animation-delay: -7.8292577015185305s;
+    .node-anim-6 {
+      animation: driftNode6 15.240154182961835s infinite ease-in-out;
     }
   
-    @keyframes moveNode7 {
+    @keyframes driftNode7 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(2.7316348451795647px, 8.404623345034777px); }
+      33% { transform: translate(-13.50960348586768px, -34.590736763946225px); }
+      66% { transform: translate(-6.75480174293384px, 17.295368381973113px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node7 {
-      animation: moveNode7 27.761311038772895s infinite ease-in-out;
-      animation-delay: -12.52124280443001s;
+    .node-anim-7 {
+      animation: driftNode7 9.296002437442727s infinite ease-in-out;
     }
   
-    @keyframes moveNode8 {
+    @keyframes driftNode8 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(10.42189246097751px, -12.643786686185475px); }
+      33% { transform: translate(20.289407374950727px, -8.382641199719734px); }
+      66% { transform: translate(10.144703687475364px, 4.191320599859867px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node8 {
-      animation: moveNode8 21.781421757470895s infinite ease-in-out;
-      animation-delay: -8.667110672133338s;
+    .node-anim-8 {
+      animation: driftNode8 17.078097904578357s infinite ease-in-out;
     }
   
-    @keyframes moveNode9 {
+    @keyframes driftNode9 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(6.514723879152722px, 19.01625568879121px); }
+      33% { transform: translate(6.529504610963119px, 10.885367440362792px); }
+      66% { transform: translate(3.2647523054815597px, -5.442683720181396px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node9 {
-      animation: moveNode9 12.842613296071931s infinite ease-in-out;
-      animation-delay: -18.966105054283563s;
+    .node-anim-9 {
+      animation: driftNode9 8.79474518507693s infinite ease-in-out;
     }
   
-    @keyframes moveNode10 {
+    @keyframes driftNode10 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(17.14330877975868px, 29.649481479396137px); }
+      33% { transform: translate(1.0769709775566838px, 0.6785116242546163px); }
+      66% { transform: translate(0.5384854887783419px, -0.33925581212730815px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node10 {
-      animation: moveNode10 21.723519877251906s infinite ease-in-out;
-      animation-delay: -13.008758556595598s;
+    .node-anim-10 {
+      animation: driftNode10 11.81857773764351s infinite ease-in-out;
     }
   
-    @keyframes moveNode11 {
+    @keyframes driftNode11 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-12.025110826806634px, -26.33321160827765px); }
+      33% { transform: translate(-2.1661044001950636px, 24.663254622823125px); }
+      66% { transform: translate(-1.0830522000975318px, -12.331627311411562px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node11 {
-      animation: moveNode11 11.031926405886452s infinite ease-in-out;
-      animation-delay: -0.8517194582460674s;
+    .node-anim-11 {
+      animation: driftNode11 10.215180773669891s infinite ease-in-out;
     }
   
-    @keyframes moveNode12 {
+    @keyframes driftNode12 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-0.1451464789440582px, 22.660381015594957px); }
+      33% { transform: translate(-20.388357925640925px, -30.67582710633925px); }
+      66% { transform: translate(-10.194178962820462px, 15.337913553169624px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node12 {
-      animation: moveNode12 28.151074569737613s infinite ease-in-out;
-      animation-delay: -11.052180580356946s;
+    .node-anim-12 {
+      animation: driftNode12 13.861544181279317s infinite ease-in-out;
     }
   
-    @keyframes moveNode13 {
+    @keyframes driftNode13 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(17.92803953384833px, -17.284644839088962px); }
+      33% { transform: translate(-19.383565107433355px, 33.10939987308869px); }
+      66% { transform: translate(-9.691782553716678px, -16.554699936544345px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node13 {
-      animation: moveNode13 13.475014774746306s infinite ease-in-out;
-      animation-delay: -9.021366622886461s;
+    .node-anim-13 {
+      animation: driftNode13 10.126560479423624s infinite ease-in-out;
     }
   
-    @keyframes moveNode14 {
+    @keyframes driftNode14 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(22.151162479214655px, -13.402891904436004px); }
+      33% { transform: translate(15.943188080064337px, 13.390402417003475px); }
+      66% { transform: translate(7.971594040032168px, -6.695201208501738px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node14 {
-      animation: moveNode14 12.963849881096435s infinite ease-in-out;
-      animation-delay: -5.905101678013331s;
+    .node-anim-14 {
+      animation: driftNode14 12.055757965952663s infinite ease-in-out;
     }
   
-    @keyframes moveNode15 {
+    @keyframes driftNode15 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(21.68266826078632px, 4.4683333095601px); }
+      33% { transform: translate(-23.37166636241794px, 22.115289523884172px); }
+      66% { transform: translate(-11.68583318120897px, -11.057644761942086px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node15 {
-      animation: moveNode15 23.949022266310447s infinite ease-in-out;
-      animation-delay: -19.040784408734368s;
+    .node-anim-15 {
+      animation: driftNode15 15.192680954022228s infinite ease-in-out;
     }
   
-    @keyframes moveNode16 {
+    @keyframes driftNode16 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-26.61825737690652px, -1.9121721055068885px); }
+      33% { transform: translate(-31.593231808357185px, 18.070553104833948px); }
+      66% { transform: translate(-15.796615904178593px, -9.035276552416974px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node16 {
-      animation: moveNode16 16.92925722379423s infinite ease-in-out;
-      animation-delay: -16.140348631817258s;
+    .node-anim-16 {
+      animation: driftNode16 16.903303318760138s infinite ease-in-out;
     }
   
-    @keyframes moveNode17 {
+    @keyframes driftNode17 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-22.750161745278778px, -26.528893562667747px); }
+      33% { transform: translate(-12.574981648910653px, -19.101080908198618px); }
+      66% { transform: translate(-6.287490824455326px, 9.550540454099309px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node17 {
-      animation: moveNode17 17.477453496231952s infinite ease-in-out;
-      animation-delay: -6.288690576607436s;
+    .node-anim-17 {
+      animation: driftNode17 14.524093080590529s infinite ease-in-out;
     }
   
-    @keyframes moveNode18 {
+    @keyframes driftNode18 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(13.044156524992577px, 6.398749237536901px); }
+      33% { transform: translate(-15.480316149726763px, 29.182508596208862px); }
+      66% { transform: translate(-7.740158074863381px, -14.591254298104431px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node18 {
-      animation: moveNode18 29.922804421859798s infinite ease-in-out;
-      animation-delay: -6.5576701587346715s;
+    .node-anim-18 {
+      animation: driftNode18 16.017658070419603s infinite ease-in-out;
     }
   
-    @keyframes moveNode19 {
+    @keyframes driftNode19 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-9.472517449489771px, 15.97463650021698px); }
+      33% { transform: translate(13.026503414830888px, 17.819721624489688px); }
+      66% { transform: translate(6.513251707415444px, -8.909860812244844px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node19 {
-      animation: moveNode19 23.368599942318674s infinite ease-in-out;
-      animation-delay: -2.534714483458238s;
+    .node-anim-19 {
+      animation: driftNode19 10.118310318904296s infinite ease-in-out;
     }
   
-    @keyframes moveNode20 {
+    @keyframes driftNode20 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-16.553355092674487px, 27.39863538348915px); }
+      33% { transform: translate(39.06457578407604px, -13.59678991737474px); }
+      66% { transform: translate(19.53228789203802px, 6.79839495868737px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node20 {
-      animation: moveNode20 21.518944192537152s infinite ease-in-out;
-      animation-delay: -10.05975461871076s;
+    .node-anim-20 {
+      animation: driftNode20 14.22959591597133s infinite ease-in-out;
     }
   
-    @keyframes moveNode21 {
+    @keyframes driftNode21 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(12.425875643565387px, 13.22590699620547px); }
+      33% { transform: translate(17.57712469976464px, 30.4914682435885px); }
+      66% { transform: translate(8.78856234988232px, -15.24573412179425px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node21 {
-      animation: moveNode21 19.463864455806217s infinite ease-in-out;
-      animation-delay: -6.327377722515568s;
+    .node-anim-21 {
+      animation: driftNode21 19.932134608521984s infinite ease-in-out;
     }
   
-    @keyframes moveNode22 {
+    @keyframes driftNode22 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(9.99021985129772px, -27.093966273112212px); }
+      33% { transform: translate(28.63605131445346px, -4.2275850061106635px); }
+      66% { transform: translate(14.31802565722673px, 2.1137925030553317px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node22 {
-      animation: moveNode22 12.47716599422973s infinite ease-in-out;
-      animation-delay: -6.937335237137161s;
+    .node-anim-22 {
+      animation: driftNode22 11.035143249097688s infinite ease-in-out;
     }
   
-    @keyframes moveNode23 {
+    @keyframes driftNode23 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(8.95541131049473px, -14.122547452949483px); }
+      33% { transform: translate(1.0457073905234893px, -2.6300673728774004px); }
+      66% { transform: translate(0.5228536952617446px, 1.3150336864387002px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node23 {
-      animation: moveNode23 18.478163565108364s infinite ease-in-out;
-      animation-delay: -0.5795005738641046s;
+    .node-anim-23 {
+      animation: driftNode23 14.802656265839595s infinite ease-in-out;
     }
   
-    @keyframes moveNode24 {
+    @keyframes driftNode24 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(17.537336244385394px, -4.017768151079468px); }
+      33% { transform: translate(-14.167568067725798px, -0.7235190644558909px); }
+      66% { transform: translate(-7.083784033862899px, 0.36175953222794544px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node24 {
-      animation: moveNode24 24.300246415793083s infinite ease-in-out;
-      animation-delay: -9.445709299446495s;
+    .node-anim-24 {
+      animation: driftNode24 18.801950626826223s infinite ease-in-out;
     }
   
-    @keyframes moveNode25 {
+    @keyframes driftNode25 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(11.446839085629502px, -20.824654357825043px); }
+      33% { transform: translate(-5.803734915419989px, -16.44142152783532px); }
+      66% { transform: translate(-2.9018674577099945px, 8.22071076391766px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node25 {
-      animation: moveNode25 27.71077742101791s infinite ease-in-out;
-      animation-delay: -4.454755751156294s;
+    .node-anim-25 {
+      animation: driftNode25 14.787725039307055s infinite ease-in-out;
     }
   
-    @keyframes moveNode26 {
+    @keyframes driftNode26 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(10.110203906998898px, 13.495549538950018px); }
+      33% { transform: translate(-24.615803462285008px, 20.55501645807641px); }
+      66% { transform: translate(-12.307901731142504px, -10.277508229038204px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node26 {
-      animation: moveNode26 11.338028941237566s infinite ease-in-out;
-      animation-delay: -12.264698038649598s;
+    .node-anim-26 {
+      animation: driftNode26 8.02744805677562s infinite ease-in-out;
     }
   
-    @keyframes moveNode27 {
+    @keyframes driftNode27 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-14.809462607399421px, -13.449697288779541px); }
+      33% { transform: translate(23.348164968203726px, 20.152357133872183px); }
+      66% { transform: translate(11.674082484101863px, -10.076178566936091px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node27 {
-      animation: moveNode27 26.0593266390229s infinite ease-in-out;
-      animation-delay: -1.5683093574317453s;
+    .node-anim-27 {
+      animation: driftNode27 13.45298170271978s infinite ease-in-out;
     }
   
-    @keyframes moveNode28 {
+    @keyframes driftNode28 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(25.98093092978668px, -0.5473034952283884px); }
+      33% { transform: translate(35.667023468446416px, 29.37651007997421px); }
+      66% { transform: translate(17.833511734223208px, -14.688255039987105px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node28 {
-      animation: moveNode28 22.823911228516316s infinite ease-in-out;
-      animation-delay: -7.084366112293219s;
+    .node-anim-28 {
+      animation: driftNode28 10.7947989836409s infinite ease-in-out;
     }
   
-    @keyframes moveNode29 {
+    @keyframes driftNode29 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-7.089805979637269px, 13.57047893518127px); }
+      33% { transform: translate(-27.021898914860003px, 21.78475466033044px); }
+      66% { transform: translate(-13.510949457430002px, -10.89237733016522px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node29 {
-      animation: moveNode29 19.182671733986624s infinite ease-in-out;
-      animation-delay: -14.080721068476327s;
+    .node-anim-29 {
+      animation: driftNode29 10.622171676279375s infinite ease-in-out;
     }
   
-    @keyframes moveNode30 {
+    @keyframes driftNode30 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-6.5002050411396635px, 27.38915365582531px); }
+      33% { transform: translate(17.724466609781693px, 23.38442990870142px); }
+      66% { transform: translate(8.862233304890847px, -11.69221495435071px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node30 {
-      animation: moveNode30 17.996213350051704s infinite ease-in-out;
-      animation-delay: -8.936187931392256s;
+    .node-anim-30 {
+      animation: driftNode30 13.21953885199707s infinite ease-in-out;
     }
   
-    @keyframes moveNode31 {
+    @keyframes driftNode31 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(0.77487511128286px, -29.014928550401265px); }
+      33% { transform: translate(20.238402705467085px, -38.33972777333952px); }
+      66% { transform: translate(10.119201352733542px, 19.16986388666976px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node31 {
-      animation: moveNode31 14.507574427971687s infinite ease-in-out;
-      animation-delay: -3.512599630906603s;
+    .node-anim-31 {
+      animation: driftNode31 12.695743510925988s infinite ease-in-out;
     }
   
-    @keyframes moveNode32 {
+    @keyframes driftNode32 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(6.709197651989549px, -22.168764795507386px); }
+      33% { transform: translate(-27.78149997409053px, -13.04965618114525px); }
+      66% { transform: translate(-13.890749987045265px, 6.524828090572625px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node32 {
-      animation: moveNode32 29.621227762227893s infinite ease-in-out;
-      animation-delay: -16.164820386605633s;
+    .node-anim-32 {
+      animation: driftNode32 14.888939700020627s infinite ease-in-out;
     }
   
-    @keyframes moveNode33 {
+    @keyframes driftNode33 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-10.922454923704457px, -29.834117612846626px); }
+      33% { transform: translate(-38.64675895958805px, -8.309782854091132px); }
+      66% { transform: translate(-19.323379479794024px, 4.154891427045566px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node33 {
-      animation: moveNode33 20.264710958135108s infinite ease-in-out;
-      animation-delay: -12.227442556357495s;
+    .node-anim-33 {
+      animation: driftNode33 17.083777149589963s infinite ease-in-out;
     }
   
-    @keyframes moveNode34 {
+    @keyframes driftNode34 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-6.792701589574921px, -29.700701765903688px); }
+      33% { transform: translate(-9.506355708177763px, 38.71571558798459px); }
+      66% { transform: translate(-4.753177854088881px, -19.357857793992295px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node34 {
-      animation: moveNode34 14.30853923216754s infinite ease-in-out;
-      animation-delay: -17.652484994155753s;
+    .node-anim-34 {
+      animation: driftNode34 16.077338998121306s infinite ease-in-out;
     }
   
-    @keyframes moveNode35 {
+    @keyframes driftNode35 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(15.66648274979811px, -24.01609519943432px); }
+      33% { transform: translate(12.149828687003117px, -12.314907875808423px); }
+      66% { transform: translate(6.0749143435015585px, 6.1574539379042115px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node35 {
-      animation: moveNode35 29.774141668039388s infinite ease-in-out;
-      animation-delay: -14.713886610913038s;
+    .node-anim-35 {
+      animation: driftNode35 19.394364431789228s infinite ease-in-out;
     }
   
-    @keyframes moveNode36 {
+    @keyframes driftNode36 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(13.443549323219884px, -9.629359730667579px); }
+      33% { transform: translate(22.47779972442281px, 20.832833766101064px); }
+      66% { transform: translate(11.238899862211404px, -10.416416883050532px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node36 {
-      animation: moveNode36 14.049009945098225s infinite ease-in-out;
-      animation-delay: -11.588811738761972s;
+    .node-anim-36 {
+      animation: driftNode36 10.730336067110326s infinite ease-in-out;
     }
   
-    @keyframes moveNode37 {
+    @keyframes driftNode37 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-23.353684240870656px, 28.394527850889762px); }
+      33% { transform: translate(24.682868321314622px, -13.692721649049187px); }
+      66% { transform: translate(12.341434160657311px, 6.846360824524593px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node37 {
-      animation: moveNode37 16.19921604302536s infinite ease-in-out;
-      animation-delay: -15.123082324170396s;
+    .node-anim-37 {
+      animation: driftNode37 16.788154313318017s infinite ease-in-out;
     }
   
-    @keyframes moveNode38 {
+    @keyframes driftNode38 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(25.3711356293195px, -9.662001874506439px); }
+      33% { transform: translate(-34.12417189260948px, 23.474200671329886px); }
+      66% { transform: translate(-17.06208594630474px, -11.737100335664943px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node38 {
-      animation: moveNode38 29.130657448895935s infinite ease-in-out;
-      animation-delay: -19.850989245396047s;
+    .node-anim-38 {
+      animation: driftNode38 19.431545015697022s infinite ease-in-out;
     }
   
-    @keyframes moveNode39 {
+    @keyframes driftNode39 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-5.781725768977326px, 28.97111570724413px); }
+      33% { transform: translate(-7.651790319868645px, -34.92409876411739px); }
+      66% { transform: translate(-3.8258951599343227px, 17.462049382058694px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node39 {
-      animation: moveNode39 26.542378211984435s infinite ease-in-out;
-      animation-delay: -8.915339356749865s;
+    .node-anim-39 {
+      animation: driftNode39 14.584681487276395s infinite ease-in-out;
     }
   
-    @keyframes moveNode40 {
+    @keyframes driftNode40 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-5.361700491157055px, -0.6655821019749286px); }
+      33% { transform: translate(-35.42267496836302px, -2.5383351019033906px); }
+      66% { transform: translate(-17.71133748418151px, 1.2691675509516953px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node40 {
-      animation: moveNode40 26.82007971665678s infinite ease-in-out;
-      animation-delay: -13.796353591123058s;
+    .node-anim-40 {
+      animation: driftNode40 12.026532422587149s infinite ease-in-out;
     }
   
-    @keyframes moveNode41 {
+    @keyframes driftNode41 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(27.904769562639178px, -20.831665052110626px); }
+      33% { transform: translate(-34.05817036039131px, -8.271662657805097px); }
+      66% { transform: translate(-17.029085180195654px, 4.135831328902548px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node41 {
-      animation: moveNode41 24.3818936499806s infinite ease-in-out;
-      animation-delay: -11.88899523714116s;
+    .node-anim-41 {
+      animation: driftNode41 15.691927179380139s infinite ease-in-out;
     }
   
-    @keyframes moveNode42 {
+    @keyframes driftNode42 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-15.963329666636483px, 18.20468184363692px); }
+      33% { transform: translate(21.877307980316296px, 14.22077780939972px); }
+      66% { transform: translate(10.938653990158148px, -7.11038890469986px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node42 {
-      animation: moveNode42 17.15199155515765s infinite ease-in-out;
-      animation-delay: -17.95002806833811s;
+    .node-anim-42 {
+      animation: driftNode42 15.349950741794537s infinite ease-in-out;
     }
   
-    @keyframes moveNode43 {
+    @keyframes driftNode43 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(28.769757447154902px, 11.667200099924877px); }
+      33% { transform: translate(21.254168360364414px, -39.27645471732735px); }
+      66% { transform: translate(10.627084180182207px, 19.638227358663674px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node43 {
-      animation: moveNode43 12.698591738484005s infinite ease-in-out;
-      animation-delay: -8.881385055274666s;
+    .node-anim-43 {
+      animation: driftNode43 19.425774398760474s infinite ease-in-out;
     }
   
-    @keyframes moveNode44 {
+    @keyframes driftNode44 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-24.11418704808102px, 2.969899836870269px); }
+      33% { transform: translate(-31.110443522272515px, -33.3888636126217px); }
+      66% { transform: translate(-15.555221761136258px, 16.69443180631085px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node44 {
-      animation: moveNode44 24.041908141653046s infinite ease-in-out;
-      animation-delay: -13.814019111694456s;
+    .node-anim-44 {
+      animation: driftNode44 11.595831307892547s infinite ease-in-out;
     }
   
-    @keyframes moveNode45 {
+    @keyframes driftNode45 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(20.794341416105308px, 13.824074572843749px); }
+      33% { transform: translate(38.311150474390104px, -18.88843090807069px); }
+      66% { transform: translate(19.155575237195052px, 9.444215454035344px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node45 {
-      animation: moveNode45 20.189191998529868s infinite ease-in-out;
-      animation-delay: -11.66851920814588s;
+    .node-anim-45 {
+      animation: driftNode45 8.230971444307066s infinite ease-in-out;
     }
   
-    @keyframes moveNode46 {
+    @keyframes driftNode46 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-19.230345159526326px, 11.437411690363692px); }
+      33% { transform: translate(2.0860314957224px, -32.462329180548736px); }
+      66% { transform: translate(1.0430157478612px, 16.231164590274368px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node46 {
-      animation: moveNode46 19.748503882157515s infinite ease-in-out;
-      animation-delay: -1.674954532474322s;
+    .node-anim-46 {
+      animation: driftNode46 18.11810248386218s infinite ease-in-out;
     }
   
-    @keyframes moveNode47 {
+    @keyframes driftNode47 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-26.838691668948165px, 8.818360243860583px); }
+      33% { transform: translate(12.508947246068098px, -13.023051533524876px); }
+      66% { transform: translate(6.254473623034049px, 6.511525766762438px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node47 {
-      animation: moveNode47 22.284594083994584s infinite ease-in-out;
-      animation-delay: -11.564249215718887s;
+    .node-anim-47 {
+      animation: driftNode47 19.225926018265348s infinite ease-in-out;
     }
   
-    @keyframes moveNode48 {
+    @keyframes driftNode48 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(10.06605775855281px, -28.094155303524257px); }
+      33% { transform: translate(-37.50345122794058px, -32.46753012705827px); }
+      66% { transform: translate(-18.75172561397029px, 16.233765063529134px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node48 {
-      animation: moveNode48 10.02790125582992s infinite ease-in-out;
-      animation-delay: -7.850347571324708s;
+    .node-anim-48 {
+      animation: driftNode48 18.958448831691097s infinite ease-in-out;
     }
   
-    @keyframes moveNode49 {
+    @keyframes driftNode49 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(10.292836200519114px, -5.879421554322308px); }
+      33% { transform: translate(-35.185651900916845px, -17.509744681727526px); }
+      66% { transform: translate(-17.592825950458423px, 8.754872340863763px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node49 {
-      animation: moveNode49 29.983458991963225s infinite ease-in-out;
-      animation-delay: -12.611251401798164s;
+    .node-anim-49 {
+      animation: driftNode49 12.041239432960309s infinite ease-in-out;
     }
   
-    @keyframes moveNode50 {
+    @keyframes driftNode50 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(25.982323205438075px, -2.2950640239068565px); }
+      33% { transform: translate(32.95157123278018px, 13.588806018523139px); }
+      66% { transform: translate(16.47578561639009px, -6.794403009261569px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node50 {
-      animation: moveNode50 19.900412320545524s infinite ease-in-out;
-      animation-delay: -17.857463174726696s;
+    .node-anim-50 {
+      animation: driftNode50 16.07471933001618s infinite ease-in-out;
     }
   
-    @keyframes moveNode51 {
+    @keyframes driftNode51 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(29.208368644385352px, 6.252495095399729px); }
+      33% { transform: translate(4.296900990622685px, -26.037881480346748px); }
+      66% { transform: translate(2.1484504953113426px, 13.018940740173374px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node51 {
-      animation: moveNode51 17.365003158033794s infinite ease-in-out;
-      animation-delay: -15.654659765097605s;
+    .node-anim-51 {
+      animation: driftNode51 14.800467285285308s infinite ease-in-out;
     }
   
-    @keyframes moveNode52 {
+    @keyframes driftNode52 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(1.6503046011073619px, 26.48686536751562px); }
+      33% { transform: translate(-23.853957452572754px, 22.101249907064666px); }
+      66% { transform: translate(-11.926978726286377px, -11.050624953532333px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node52 {
-      animation: moveNode52 27.44781651872709s infinite ease-in-out;
-      animation-delay: -12.387761331905473s;
+    .node-anim-52 {
+      animation: driftNode52 10.169287476676534s infinite ease-in-out;
     }
   
-    @keyframes moveNode53 {
+    @keyframes driftNode53 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-13.122961469514278px, 16.51224615650991px); }
+      33% { transform: translate(-10.58282691305493px, -35.020869404548904px); }
+      66% { transform: translate(-5.291413456527465px, 17.510434702274452px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node53 {
-      animation: moveNode53 22.13155050969612s infinite ease-in-out;
-      animation-delay: -11.035942588707941s;
+    .node-anim-53 {
+      animation: driftNode53 17.879713790669506s infinite ease-in-out;
     }
   
-    @keyframes moveNode54 {
+    @keyframes driftNode54 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-23.164340690976676px, 10.951796112203526px); }
+      33% { transform: translate(9.070185417356837px, 39.32056826790071px); }
+      66% { transform: translate(4.535092708678419px, -19.660284133950356px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node54 {
-      animation: moveNode54 25.708669372921776s infinite ease-in-out;
-      animation-delay: -0.596567094708853s;
+    .node-anim-54 {
+      animation: driftNode54 8.924023796181288s infinite ease-in-out;
     }
   
-    @keyframes moveNode55 {
+    @keyframes driftNode55 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-26.50030208596886px, -8.979032733484287px); }
+      33% { transform: translate(-13.16088928048984px, -11.966609848999328px); }
+      66% { transform: translate(-6.58044464024492px, 5.983304924499664px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node55 {
-      animation: moveNode55 28.1391113944137s infinite ease-in-out;
-      animation-delay: -13.705942918942327s;
+    .node-anim-55 {
+      animation: driftNode55 18.94476446417865s infinite ease-in-out;
     }
   
-    @keyframes moveNode56 {
+    @keyframes driftNode56 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-3.303574239334366px, -23.867382973221098px); }
+      33% { transform: translate(-33.30747665738507px, 17.260284264392006px); }
+      66% { transform: translate(-16.653738328692533px, -8.630142132196003px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node56 {
-      animation: moveNode56 12.966895831784882s infinite ease-in-out;
-      animation-delay: -9.110131965119862s;
+    .node-anim-56 {
+      animation: driftNode56 9.237589435004653s infinite ease-in-out;
     }
   
-    @keyframes moveNode57 {
+    @keyframes driftNode57 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(16.633307814375602px, 18.02138593526648px); }
+      33% { transform: translate(-35.79783734011745px, 14.795200503544992px); }
+      66% { transform: translate(-17.898918670058723px, -7.397600251772496px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node57 {
-      animation: moveNode57 11.413588747532268s infinite ease-in-out;
-      animation-delay: -10.270117200319262s;
+    .node-anim-57 {
+      animation: driftNode57 16.36502036657817s infinite ease-in-out;
     }
   
-    @keyframes moveNode58 {
+    @keyframes driftNode58 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(25.329028828299375px, -16.027534279056365px); }
+      33% { transform: translate(-39.761171663376615px, -36.23587381907886px); }
+      66% { transform: translate(-19.880585831688308px, 18.11793690953943px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node58 {
-      animation: moveNode58 15.720910119909156s infinite ease-in-out;
-      animation-delay: -17.175926356495342s;
+    .node-anim-58 {
+      animation: driftNode58 9.201559663274097s infinite ease-in-out;
     }
   
-    @keyframes moveNode59 {
+    @keyframes driftNode59 {
       0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-5.911083424030538px, 12.488363003281204px); }
+      33% { transform: translate(-19.282241186425033px, 35.10875053792554px); }
+      66% { transform: translate(-9.641120593212516px, -17.55437526896277px); }
       100% { transform: translate(0px, 0px); }
     }
-    .node59 {
-      animation: moveNode59 28.214011738777987s infinite ease-in-out;
-      animation-delay: -7.245273597884124s;
-    }
-  
-    @keyframes moveNode60 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(16.2598042691328px, -27.0329962348934px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node60 {
-      animation: moveNode60 26.366443864143957s infinite ease-in-out;
-      animation-delay: -3.510050635978732s;
-    }
-  
-    @keyframes moveNode61 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-25.188554143611974px, -24.900612743045297px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node61 {
-      animation: moveNode61 26.73273525591281s infinite ease-in-out;
-      animation-delay: -17.026620154374875s;
-    }
-  
-    @keyframes moveNode62 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(8.055457060162643px, -19.51505451128271px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node62 {
-      animation: moveNode62 11.242700824904574s infinite ease-in-out;
-      animation-delay: -13.309744680627912s;
-    }
-  
-    @keyframes moveNode63 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-4.2734578682479185px, 14.450035949654048px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node63 {
-      animation: moveNode63 29.843004174711353s infinite ease-in-out;
-      animation-delay: -13.002581356131397s;
-    }
-  
-    @keyframes moveNode64 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(9.367392764291818px, -26.286819720670906px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node64 {
-      animation: moveNode64 20.750325223941605s infinite ease-in-out;
-      animation-delay: -10.535442834649743s;
-    }
-  
-    @keyframes moveNode65 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-25.102707298965118px, 26.532327793931813px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node65 {
-      animation: moveNode65 27.28411250680899s infinite ease-in-out;
-      animation-delay: -18.166441363834075s;
-    }
-  
-    @keyframes moveNode66 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(19.921377332968714px, -16.878553940163325px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node66 {
-      animation: moveNode66 11.802360900433449s infinite ease-in-out;
-      animation-delay: -14.635888596352311s;
-    }
-  
-    @keyframes moveNode67 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(4.123505641843421px, 2.1638568516365386px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node67 {
-      animation: moveNode67 20.573607981055034s infinite ease-in-out;
-      animation-delay: -3.947225184323373s;
-    }
-  
-    @keyframes moveNode68 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(12.234108527523693px, 15.320767699533855px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node68 {
-      animation: moveNode68 14.87089465563223s infinite ease-in-out;
-      animation-delay: -0.7838367396712198s;
-    }
-  
-    @keyframes moveNode69 {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-3.175746238019481px, -8.030578825689947px); }
-      100% { transform: translate(0px, 0px); }
-    }
-    .node69 {
-      animation: moveNode69 15.8116302422719s infinite ease-in-out;
-      animation-delay: -4.7818021002947875s;
+    .node-anim-59 {
+      animation: driftNode59 17.10101762529697s infinite ease-in-out;
     }
   
     </style>
     
     <pattern id="scanlinePattern" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="0" width="4" height="2" fill="rgba(0,0,0,0.3)" />
-      <rect x="0" y="2" width="4" height="2" fill="rgba(18,16,16,0.1)" />
+      <rect x="0" y="0" width="4" height="1" fill="rgba(255,255,255,0.06)" />
+      <rect x="0" y="2" width="4" height="1" fill="rgba(0,0,0,0.3)" />
     </pattern>
 
-    <!-- Noise Filter -->
     <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
     </filter>
-    <pattern id="noiseFilterPattern" width="200" height="200" patternUnits="userSpaceOnUse">
-      <rect width="200" height="200" filter="url(#noiseFilter)" />
+    <pattern id="noiseFilterPattern" width="300" height="300" patternUnits="userSpaceOnUse">
+      <rect width="300" height="300" filter="url(#noiseFilter)" />
     </pattern>
 
-    <filter id="heavy-blur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-    </filter>
+    <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff003c" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Radar Sweep Gradient -->
+    <radialGradient id="radar" cx="50%" cy="50%" r="50%">
+      <stop offset="80%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.1"/>
+    </radialGradient>
   </defs>
 
-  <!-- Dark Background -->
+  <!-- Deep Base -->
   <rect width="100%" height="100%" class="bg" />
+
+  <!-- Noise Layer (Behind everything) -->
+  <rect width="100%" height="100%" fill="url(#noiseFilterPattern)" opacity="0.1" mix-blend-mode="color-dodge" />
 
   <!-- Moving Grid -->
   <g class="moving-grid">
-    <line x1="0" y1="-50" x2="0" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="60" y1="-50" x2="60" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="120" y1="-50" x2="120" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="180" y1="-50" x2="180" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="240" y1="-50" x2="240" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="300" y1="-50" x2="300" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="360" y1="-50" x2="360" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="420" y1="-50" x2="420" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="480" y1="-50" x2="480" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="540" y1="-50" x2="540" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="600" y1="-50" x2="600" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="660" y1="-50" x2="660" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="720" y1="-50" x2="720" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="780" y1="-50" x2="780" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="840" y1="-50" x2="840" y2="330" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="0" x2="850" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="60" x2="850" y2="60" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="120" x2="850" y2="120" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="180" x2="850" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="240" x2="850" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1" /><line x1="-50" y1="300" x2="850" y2="300" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+    <line x1="0" y1="-50" x2="0" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="40" y1="-50" x2="40" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="80" y1="-50" x2="80" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="120" y1="-50" x2="120" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="160" y1="-50" x2="160" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="200" y1="-50" x2="200" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="240" y1="-50" x2="240" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="280" y1="-50" x2="280" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="320" y1="-50" x2="320" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="360" y1="-50" x2="360" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="400" y1="-50" x2="400" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="440" y1="-50" x2="440" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="480" y1="-50" x2="480" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="520" y1="-50" x2="520" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="560" y1="-50" x2="560" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="600" y1="-50" x2="600" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="640" y1="-50" x2="640" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="680" y1="-50" x2="680" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="720" y1="-50" x2="720" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="760" y1="-50" x2="760" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="800" y1="-50" x2="800" y2="330" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="0" x2="850" y2="0" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="40" x2="850" y2="40" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="80" x2="850" y2="80" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="120" x2="850" y2="120" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="160" x2="850" y2="160" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="200" x2="850" y2="200" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="240" x2="850" y2="240" stroke="rgba(255,255,255,0.06)" stroke-width="1" /><line x1="-50" y1="280" x2="850" y2="280" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
   </g>
 
-  <!-- Static connecting edges -->
+  <!-- Giant Radar/Orbit lines in BG -->
+  <circle cx="400" cy="140" r="280" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+  <circle cx="400" cy="140" r="180" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="10 5" />
+  <circle cx="400" cy="140" r="90" fill="url(#radar)" />
+
+  <!-- Edges & Nodes -->
   <g>
-    <line x1="543.0308609899128" y1="263.16933958923624" x2="554.0552730977478" y2="273.16083550041327" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="288.84490717295563" y1="237.30897231156143" x2="293.6146088276003" y2="175.75673278695075" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="670.8793910202041" y1="263.7528722414478" x2="597.6829600160374" y2="327.6859535038931" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="397.45250386194925" y1="163.6084852656545" x2="376.82992344262675" y2="90.61666927920518" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="234.05209380013616" y1="174.48776651215366" x2="303.0935866406793" y2="109.55437378869433" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="271.57780606839685" y1="183.10154982690773" x2="218.88158714163106" y2="112.24698477425086" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="716.0008207390641" y1="268.06388202610066" x2="699.2361283884062" y2="199.3307670519107" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="195.43260013532287" y1="166.07565156145915" x2="247.5615012115817" y2="213.9617123870803" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="445.4064875047848" y1="232.30900674141145" x2="435.4836590224109" y2="289.01810004451227" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="790.3130960622088" y1="251.01145180389685" x2="810.8593308248226" y2="252.74365399987542" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="295.54553011985723" y1="15.702923530034433" x2="278.0135605489182" y2="-23.1986501341408" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="215.27072020887329" y1="257.75838858966546" x2="188.585833799037" y2="199.54012364772754" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="487.76329262842904" y1="81.400287375935" x2="441.05567854951744" y2="120.69872145696745" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="554.0695436612148" y1="76.28696693513125" x2="547.4712648028418" y2="86.33372842894664" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="639.4515190389538" y1="252.06126754429582" x2="681.2846979397727" y2="191.1707817104223" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="318.8301777340109" y1="261.01053217141396" x2="385.67532318468193" y2="206.0469955073089" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="364.0992777952183" y1="121.4820936955789" x2="374.5862955616891" y2="149.90575420915204" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="152.9595440570529" y1="92.75405319768421" x2="119.13165153958707" y2="133.13136318910864" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="419.37360935565107" y1="196.02618033476097" x2="469.78740449702235" y2="217.19001903694345" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="553.6305201208074" y1="91.39025179802066" x2="572.6659654740121" y2="66.85289675920963" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="490.0234619810489" y1="93.26130086736482" x2="472.202626689803" y2="71.80517434940377" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="521.901094154463" y1="47.40441744103356" x2="568.9144668316941" y2="5.203949838211663" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="589.7937161814551" y1="11.211421621078834" x2="605.0047592498754" y2="34.766352889641745" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="442.6660285821276" y1="162.7639286382065" x2="479.91850811026666" y2="200.8518136917153" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="699.2361669695164" y1="105.48891289005628" x2="688.8507577363788" y2="34.490679953361436" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="309.4356580028143" y1="141.5377485940515" x2="331.1503443785652" y2="185.74888470917827" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="739.9469862505347" y1="225.3263825967123" x2="779.0258216819411" y2="291.44920033982305" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="590.2292783244671" y1="161.78837834844393" x2="532.2586626252207" y2="235.62695397494383" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="717.7266145947854" y1="195.40886698309868" x2="771.4757506218452" y2="264.9620805256252" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="607.1086821282349" y1="88.09408544206707" x2="590.9031501132171" y2="36.41346228875976" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="485.5909202137794" y1="81.84018964721253" x2="524.325023836858" y2="155.86358774864468" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="707.391726254681" y1="108.89716858383365" x2="640.6659219581566" y2="55.7534578075123" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="762.4729010043188" y1="24.45078504102877" x2="756.2464847675418" y2="-18.3601795025094" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="90.89826295163945" y1="254.3728701741926" x2="92.26589393499137" y2="297.3052668010411" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="16.49344501777561" y1="251.38356277350246" x2="71.49027742039266" y2="250.58616408709764" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="111.09213864418317" y1="88.17218005425319" x2="168.9388499634245" y2="27.799887069636014" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="692.6986842982905" y1="131.59606060805197" x2="714.9502366418208" y2="179.11545326960118" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="391.81032534898065" y1="239.22521709029223" x2="323.2481755207133" y2="233.0415030348742" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="188.026071953671" y1="118.7065602974235" x2="118.01101720826755" y2="117.17457369063098" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-<line x1="60.073986221906495" y1="94.9996115921941" x2="68.67398506878054" y2="119.06502464283382" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <line x1="46.675614493182316" y1="8.126426755963472" x2="6.293474159000766" y2="-10.970348905533164" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="715.8422286856234" y1="270.9251413532867" x2="696.605412756119" y2="256.8839558655731" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="31.564523092320762" y1="17.4827573310807" x2="-6.31927620958723" y2="111.20530860596458" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="77.67149235547058" y1="191.91588287215" x2="73.31724916579756" y2="251.98320092143888" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="184.072069036885" y1="185.58119590624025" x2="211.84216368033464" y2="203.64752143124537" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="750.7507103162922" y1="261.43040048085777" x2="749.2266286022257" y2="264.5208077137521" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="312.45475933542946" y1="83.38247160323604" x2="325.6838611556688" y2="40.56525056968461" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="110.27116573865987" y1="76.93748096547944" x2="157.07177606606987" y2="71.51199245831954" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="361.94350169350133" y1="132.13428077310422" x2="446.2507640842045" y2="142.3852096053802" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="250.86147438329806" y1="154.16111580447534" x2="159.13042285377827" y2="235.64298813344988" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="5.254067271675211" y1="5.95917925487905" x2="-32.05983912260941" y2="-75.66694367498665" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="642.5016917777889" y1="10.513218800435657" x2="543.1442958646851" y2="8.04829158787899" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="682.5059557042903" y1="30.7883792031106" x2="693.4548588422705" y2="69.58704851413495" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="194.48623716379626" y1="208.67677855529027" x2="290.3913617652157" y2="112.8029280877979" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="732.5782857465219" y1="147.4531216490188" x2="780.0642289275537" y2="136.0737436828778" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="566.9306251418166" y1="96.17131254355739" x2="620.2719459282192" y2="192.24604655001934" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="15.301058572819848" y1="156.71808766763917" x2="104.0430161768991" y2="138.9109161661503" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="468.732266635587" y1="93.61948790495546" x2="482.73977106379664" y2="0.4699880016796243" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="265.44244805186395" y1="105.36597085432594" x2="241.83050512958715" y2="137.06919647359817" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="69.56394875976892" y1="68.54477650337216" x2="77.40478805609507" y2="100.65588517714991" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="182.68048485682417" y1="156.0131874784661" x2="111.12855550972958" y2="67.83201720925315" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="232.05579558126058" y1="177.114397284185" x2="329.10851498697446" y2="166.55791845384306" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="503.81976943214715" y1="267.0363906709367" x2="501.26623880330663" y2="299.5334182827533" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="524.0060279336507" y1="129.60071224854735" x2="531.1458381958709" y2="65.77026068095955" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="412.25806642891536" y1="276.2948523584839" x2="395.45132285992514" y2="177.28365985432333" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="799.0698414087074" y1="138.8844037123817" x2="750.536157454945" y2="76.20826163658762" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="513.8699331644442" y1="240.2973660854156" x2="537.1338378045946" y2="226.6086624641403" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="580.1739968748891" y1="32.96162854837634" x2="636.7785118856078" y2="81.76944998865184" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="764.6553526601117" y1="227.89405454131327" x2="690.2486815256295" y2="158.2620926455258" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" /><line x1="498.2743834817686" y1="261.3973826773489" x2="532.9203906994865" y2="200.05958867249313" stroke="url(#edgeGrad)" stroke-width="1" opacity="0.4" />
+    
+      <g class="node-anim-0">
+        <rect x="384.5595465837509" y="85.13821707918426" width="3" height="3" fill="#ffffff" opacity="0.3872507830038847">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-1">
+        <rect x="20.004158233203086" y="107.88402511582973" width="3" height="3" fill="#00f0ff" opacity="0.47969011927626337">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-2">
+        <rect x="144.81902481348726" y="241.10829854056485" width="3" height="3" fill="#00f0ff" opacity="0.5653245757298146">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.5595461201334657s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-3">
+        <rect x="432.8215392858058" y="212.1718889762357" width="3" height="3" fill="#ffffff" opacity="0.48113178475955987">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-4">
+        <rect x="137.9124618380025" y="10.625983341520921" width="3" height="3" fill="#ffffff" opacity="0.5518016475102929">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-5">
+        <rect x="270.5749537872845" y="183.95080276587885" width="3" height="3" fill="#00f0ff" opacity="0.40283123187388603">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-6">
+        <rect x="0.050746400000502234" y="203.47598590014798" width="3" height="3" fill="#ffffff" opacity="0.5015339814719835">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-7">
+        <rect x="135.45757765910707" y="26.789818887382253" width="3" height="3" fill="#ffffff" opacity="0.381577339955413">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.3145963082860375s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-8">
+        <rect x="528.2997260454454" y="271.34387832897676" width="3" height="3" fill="#ffffff" opacity="0.46669797218759085">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.9158644694091848s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-9">
+        <rect x="40.126133086614644" y="199.1506476252515" width="3" height="3" fill="#ffffff" opacity="0.20469978583161152">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-10">
+        <rect x="36.31272750855447" y="25.707371865658388" width="3" height="3" fill="#ffffff" opacity="0.31830367216057887">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-11">
+        <rect x="8.496359767549556" y="7.118292438240701" width="3" height="3" fill="#00f0ff" opacity="0.5633890415635778">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.0821858180150556s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-12">
+        <rect x="695.6802397638248" y="76.52978049360921" width="3" height="3" fill="#ffffff" opacity="0.40168879189650264">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-13">
+        <rect x="194.18825420919237" y="170.50720967204157" width="3" height="3" fill="#ffffff" opacity="0.4008824242488076">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-14">
+        <rect x="545.4717104919528" y="116.89720170089706" width="3" height="3" fill="#ffffff" opacity="0.40697532100259026">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-15">
+        <rect x="599.4601473875681" y="240.47468789322656" width="3" height="3" fill="#ffffff" opacity="0.5986093852170413">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.8007259800279475s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-16">
+        <rect x="713.6303557337877" y="129.1900029517037" width="3" height="3" fill="#00f0ff" opacity="0.5849171445966774">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-17">
+        <rect x="523.323044394567" y="114.99828979516863" width="3" height="3" fill="#ffffff" opacity="0.3780131844261001">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-18">
+        <rect x="194.83457979702848" y="71.97472831986124" width="3" height="3" fill="#00f0ff" opacity="0.24830441790410235">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-19">
+        <rect x="271.70557120582475" y="49.54513729255346" width="3" height="3" fill="#ffffff" opacity="0.40995564731406375">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-20">
+        <circle cx="602.5001292571251" cy="162.60498422519584" r="2" fill="#ff003c">
+           <animate attributeName="opacity" values="0.2;1;0.2" dur="0.2s" repeatCount="indefinite"/>
+        </circle>
+        <rect x="596.5001292571251" y="156.60498422519584" width="12" height="12" fill="none" stroke="#ff003c" stroke-width="1" />
+      </g>
+    
+      <g class="node-anim-21">
+        <rect x="660.2505722486246" y="129.30981517536154" width="3" height="3" fill="#ffffff" opacity="0.3767478232946804">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-22">
+        <rect x="380.2344088042896" y="64.97242128798219" width="3" height="3" fill="#ffffff" opacity="0.24853845293951152">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-23">
+        <rect x="283.20492274580954" y="145.3631709132272" width="3" height="3" fill="#00f0ff" opacity="0.3086391814192906">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.4673200027090902s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-24">
+        <rect x="130.22829135362792" y="182.2796221413967" width="3" height="3" fill="#ffffff" opacity="0.3847617345083888">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-25">
+        <rect x="789.8537675505852" y="236.3392888681771" width="3" height="3" fill="#ffffff" opacity="0.4376592947890806">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-26">
+        <rect x="489.4248539372214" y="70.02867046214732" width="3" height="3" fill="#00f0ff" opacity="0.3398755391992455">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.279057551448651s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-27">
+        <rect x="419.8783948741682" y="216.57366697918036" width="3" height="3" fill="#00f0ff" opacity="0.27998861829139576">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-28">
+        <rect x="757.9188128416621" y="133.87513219653633" width="3" height="3" fill="#00f0ff" opacity="0.24656392134970725">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-29">
+        <rect x="282.6543447150533" y="273.22703689181225" width="3" height="3" fill="#ffffff" opacity="0.3911697942727473">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-30">
+        <rect x="798.2782803763956" y="69.55329973430923" width="3" height="3" fill="#ffffff" opacity="0.43773974080505496">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-31">
+        <rect x="378.34585077545756" y="257.35465950238665" width="3" height="3" fill="#ffffff" opacity="0.5299004264226481">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-32">
+        <rect x="497.2636607071976" y="48.91684043224075" width="3" height="3" fill="#ffffff" opacity="0.3351747325988733">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-33">
+        <rect x="710.9525306596345" y="134.3801822478846" width="3" height="3" fill="#ffffff" opacity="0.3907898266038692">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-34">
+        <rect x="511.7790975732695" y="172.0192765746126" width="3" height="3" fill="#ffffff" opacity="0.42505292806681355">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.7765499644373479s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-35">
+        <rect x="723.743403903389" y="189.4564733907125" width="3" height="3" fill="#ffffff" opacity="0.2913313752216236">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-36">
+        <rect x="49.72961512939934" y="268.0196114522119" width="3" height="3" fill="#ffffff" opacity="0.33329603272031383">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-37">
+        <rect x="59.370193225650304" y="148.15756016795805" width="3" height="3" fill="#00f0ff" opacity="0.29257545001186824">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.5149811406211353s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-38">
+        <rect x="525.1565774494889" y="140.6525915439857" width="3" height="3" fill="#00f0ff" opacity="0.5511995488650732">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-39">
+        <circle cx="312.0113136367563" cy="181.5142185992943" r="2" fill="#ff003c">
+           <animate attributeName="opacity" values="0.2;1;0.2" dur="0.2s" repeatCount="indefinite"/>
+        </circle>
+        <rect x="306.0113136367563" y="175.5142185992943" width="12" height="12" fill="none" stroke="#ff003c" stroke-width="1" />
+      </g>
+    
+      <g class="node-anim-40">
+        <rect x="308.35708952629886" y="64.8965677439969" width="3" height="3" fill="#ffffff" opacity="0.4676089249340011">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-41">
+        <rect x="664.5955335699958" y="60.59436040475143" width="3" height="3" fill="#00f0ff" opacity="0.3147355283013484">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-42">
+        <rect x="43.10660167082544" y="219.54159507078668" width="3" height="3" fill="#00f0ff" opacity="0.24494131109754816">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-43">
+        <rect x="145.47882303176817" y="276.9696009923788" width="3" height="3" fill="#ffffff" opacity="0.41946297077786987">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-44">
+        <rect x="394.18532499246555" y="256.9022502573595" width="3" height="3" fill="#ffffff" opacity="0.3518615956714492">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1899711038327374s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-45">
+        <rect x="394.3359720320835" y="224.41772086337016" width="3" height="3" fill="#ffffff" opacity="0.5690640163702237">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-46">
+        <rect x="235.4960960562267" y="152.64262383952197" width="3" height="3" fill="#ffffff" opacity="0.4806240551942123">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="0.5135736907150189s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-47">
+        <rect x="335.44062477659054" y="256.74447931397816" width="3" height="3" fill="#00f0ff" opacity="0.2244490009384532">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-48">
+        <rect x="555.8150461818408" y="183.77181273828154" width="3" height="3" fill="#ffffff" opacity="0.5707671523747639">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-49">
+        <rect x="428.01892661983504" y="132.68421146416117" width="3" height="3" fill="#ffffff" opacity="0.29586998382993324">
+          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.3072062983627963s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    
+      <g class="node-anim-50">
+        <rect x="453.19528234166955" y="230.42622092121263" width="3" height="3" fill="#00f0ff" opacity="0.3274490738653214">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-51">
+        <rect x="523.9431209315925" y="169.44278832715474" width="3" height="3" fill="#00f0ff" opacity="0.5195803887361168">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-52">
+        <rect x="418.54547887869717" y="261.68970732066873" width="3" height="3" fill="#ffffff" opacity="0.5152273915871437">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-53">
+        <rect x="435.8016787303761" y="277.285795523672" width="3" height="3" fill="#ffffff" opacity="0.5570392509035682">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-54">
+        <rect x="227.7460035970942" y="11.096599548078494" width="3" height="3" fill="#ffffff" opacity="0.5862015525575671">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-55">
+        <rect x="720.6378990669361" y="14.363824249665939" width="3" height="3" fill="#ffffff" opacity="0.5853783903602766">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-56">
+        <rect x="507.9399551556434" y="96.84095942406563" width="3" height="3" fill="#ffffff" opacity="0.5203521811961298">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-57">
+        <rect x="125.87177398824446" y="161.78850058513717" width="3" height="3" fill="#ffffff" opacity="0.5940293281476894">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-58">
+        <rect x="622.2770205133511" y="51.00083203545796" width="3" height="3" fill="#ffffff" opacity="0.3101830103908848">
+          
+        </rect>
+      </g>
+    
+      <g class="node-anim-59">
+        <rect x="664.6912734344245" y="243.5881664768194" width="3" height="3" fill="#ffffff" opacity="0.3525623288038987">
+          
+        </rect>
+      </g>
+    
+  </g>
+  
+  <!-- HUD Detail Elements -->
+  
+  <g class="hud-layer" opacity="0.4">
+    <!-- Top Left Corner Box -->
+    <path d="M 20 50 L 20 20 L 50 20" stroke="#22d3ee" stroke-width="2" fill="none" />
+    <text x="25" y="35" class="mono font-10" fill="#22d3ee">SYS_VER 1.0.4</text>
+    
+    <!-- Top Right Corner Box -->
+    <path d="M 780 50 L 780 20 L 750 20" stroke="#ef4444" stroke-width="2" fill="none" />
+    <text x="735" y="35" class="mono font-10" fill="#ef4444">ROOT//ACCESS</text>
+
+    <!-- Bottom Left Corner Box -->
+    <path d="M 20 230 L 20 260 L 50 260" stroke="#22d3ee" stroke-width="2" fill="none" />
+    <circle cx="35" cy="245" r="3" fill="#22d3ee">
+      <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Bottom Right Corner -->
+    <path d="M 780 230 L 780 260 L 750 260" stroke="#22d3ee" stroke-width="2" fill="none" />
+    
+    <!-- Decorative vertical hashes -->
+    <g transform="translate(10, 100)">
+       <line x1="0" y1="0" x2="5" y2="0" stroke="rgba(255,255,255,0.3)" />
+       <line x1="0" y1="10" x2="5" y2="10" stroke="rgba(255,255,255,0.3)" />
+       <line x1="0" y1="20" x2="5" y2="20" stroke="rgba(255,255,255,0.3)" />
+       <line x1="0" y1="30" x2="5" y2="30" stroke="rgba(255,255,255,0.3)" />
+    </g>
   </g>
 
-  <!-- Animated floating nodes -->
-  <g>
-    
-      <g class="node0">
-        <rect x="72.47690983850546" y="270.320122760508" width="4" height="4" fill="#ffffff" opacity="0.5072619508335321">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.350294527682888s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node1">
-        <rect x="457.808410337474" y="219.37900770452893" width="4" height="4" fill="#ffffff" opacity="0.9742595511477334">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.774790417779048s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node2">
-        <rect x="211.19802923452605" y="144.91785466748212" width="4" height="4" fill="#ffffff" opacity="0.4930271080877049">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.1443155479774845s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node3">
-        <rect x="613.2273665352378" y="251.22149196564715" width="4" height="4" fill="#ffffff" opacity="0.6093261428343422">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.249833176289208s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node4">
-        <rect x="531.4721848454013" y="19.700664429072148" width="4" height="4" fill="#ffffff" opacity="0.775056742511279">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1160511052159423s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node5">
-        <rect x="557.4696145134247" y="242.23060312281453" width="4" height="4" fill="#ffffff" opacity="0.5793883675404354">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.6841122727366584s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node6">
-        <rect x="171.76619506406064" y="271.91782339983456" width="4" height="4" fill="#ffffff" opacity="0.7030922984153896">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.0516335471540907s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node7">
-        <rect x="79.78903625723652" y="184.84583603238895" width="4" height="4" fill="#00f0ff" opacity="0.5817701792985116">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5755379318319673s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node8">
-        <rect x="78.49434621471754" y="165.4570601502218" width="4" height="4" fill="#ffffff" opacity="0.7417086253323484">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5075575690892968s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node9">
-        <rect x="414.91544053260924" y="125.58128631103239" width="4" height="4" fill="#ffffff" opacity="0.9175426370363627">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.625338461256562s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node10">
-        <rect x="206.4250920977949" y="211.137434179598" width="4" height="4" fill="#ffffff" opacity="0.7527337461775951">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.005613175247254s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node11">
-        <rect x="416.1146695494045" y="120.07398606912682" width="4" height="4" fill="#ffffff" opacity="0.7841223447175046">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.8695514062068415s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node12">
-        <rect x="28.094372707155248" y="133.5325254440496" width="4" height="4" fill="#ffffff" opacity="0.6411265663819694">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.167279208658655s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node13">
-        <rect x="143.73420908341427" y="131.58653290354817" width="4" height="4" fill="#00f0ff" opacity="0.6091330709995307">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7231491788441042s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node14">
-        <rect x="277.05619061201537" y="134.7218575966979" width="4" height="4" fill="#00f0ff" opacity="0.7112528231705468">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.384250508446851s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node15">
-        <rect x="323.3821520699453" y="7.885261816573255" width="4" height="4" fill="#ffffff" opacity="0.40771337864870594">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.859796147322s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node16">
-        <rect x="305.1116048920671" y="154.67762134361504" width="4" height="4" fill="#ffffff" opacity="0.7021438773123894">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.7369820011336636s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node17">
-        <rect x="42.484720726735546" y="219.69904330736895" width="4" height="4" fill="#ffffff" opacity="0.6255975895513237">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.5124803152219095s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node18">
-        <rect x="110.35396960636388" y="233.16227352018305" width="4" height="4" fill="#ffffff" opacity="0.4767299951112173">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.715736860651541s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node19">
-        <rect x="788.5850633949891" y="196.2183779274623" width="4" height="4" fill="#00f0ff" opacity="0.5387705980166757">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.075528557838514s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node20">
-        <rect x="94.79561436763464" y="15.500058399165084" width="4" height="4" fill="#ffffff" opacity="0.7913367391184494">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.217969780011475s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node21">
-        <rect x="194.48810824784223" y="242.41979188524843" width="4" height="4" fill="#ffffff" opacity="0.9127746464838487">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.656227145885732s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node22">
-        <rect x="4.842634946320558" y="86.05737884107444" width="4" height="4" fill="#00f0ff" opacity="0.6537470418018636">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7558414749058548s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node23">
-        <rect x="590.4891060753524" y="37.897436859002255" width="4" height="4" fill="#ffffff" opacity="0.8057634782163123">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.0089392688484349s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node24">
-        <rect x="360.0121830072462" y="252.4053757294602" width="4" height="4" fill="#ffffff" opacity="0.6707581009808548">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.2336905710032022s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node25">
-        <rect x="355.4057337878794" y="238.3625470626511" width="4" height="4" fill="#00f0ff" opacity="0.4892911340690009">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.499972335901757s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node26">
-        <rect x="678.4866314498651" y="144.7657464833445" width="4" height="4" fill="#00f0ff" opacity="0.5929829014400367">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.167110104276546s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node27">
-        <rect x="237.40959613173547" y="-8.831049206081879" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="245.40959613173547" y="-0.8310492060818779" width="4" height="4" fill="#ff003c" />
-        <text x="262.4095961317355" y="-3.831049206081878" class="mono font-10" fill="#ff003c">ID:247</text>
-      </g>
-    
-      <g class="node28">
-        <rect x="384.2038220621844" y="277.540326245292" width="4" height="4" fill="#ffffff" opacity="0.749255139943179">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.297568150002061s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node29">
-        <rect x="417.06509790291074" y="173.01419418425422" width="4" height="4" fill="#ffffff" opacity="0.6123808913029182">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.2073865959125714s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node30">
-        <rect x="581.7113884566336" y="183.80697144006206" width="4" height="4" fill="#ffffff" opacity="0.715977662788172">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.449222085982979s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node31">
-        <rect x="473.5907436069317" y="137.9887384258696" width="4" height="4" fill="#ffffff" opacity="0.9822204408181273">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8393400951225867s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node32">
-        <rect x="461.78974354096084" y="236.10717926008923" width="4" height="4" fill="#ffffff" opacity="0.7394837814082514">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7890206913519189s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node33">
-        <rect x="72.18210662483106" y="94.47664237882985" width="4" height="4" fill="#ffffff" opacity="0.4148032630174033">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1892622130089179s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node34">
-        <rect x="449.22847783239905" y="154.73643308566525" width="4" height="4" fill="#ffffff" opacity="0.7265983269411747">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.829522481070931s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node35">
-        <rect x="461.71730340734257" y="99.11985638624168" width="4" height="4" fill="#ffffff" opacity="0.4020617545877647">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.2338373233823634s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node36">
-        <rect x="661.013338115144" y="-0.8325254780913998" width="4" height="4" fill="#ffffff" opacity="0.8563791904728827">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4140114125104795s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node37">
-        <rect x="30.647293950694767" y="99.68157225881444" width="4" height="4" fill="#ffffff" opacity="0.8309846945058221">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1726942155758757s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node38">
-        <rect x="569.5709744848097" y="138.32621638186487" width="4" height="4" fill="#ffffff" opacity="0.7916180554393344">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.4788873973295478s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node39">
-        <rect x="252.36800669378235" y="15.544540835426254" width="4" height="4" fill="#ffffff" opacity="0.8943143616855693">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1477490400305435s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node40">
-        <rect x="341.7377644899216" y="265.5506691983198" width="4" height="4" fill="#00f0ff" opacity="0.6783886651911599">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.37593817036918s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node41">
-        <rect x="432.8776372259204" y="262.395372567082" width="4" height="4" fill="#ffffff" opacity="0.6171757411375156">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.707813640690583s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node42">
-        <rect x="758.6034511560612" y="7.568423789905648" width="4" height="4" fill="#ffffff" opacity="0.7261986539626293">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.25200361430693s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node43">
-        <rect x="707.7120295745534" y="144.77946299288925" width="4" height="4" fill="#ffffff" opacity="0.504919472635867">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.7597285096972426s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node44">
-        <rect x="648.3252729920387" y="140.3854041869059" width="4" height="4" fill="#00f0ff" opacity="0.4183269680648813">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8076605767218887s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node45">
-        <rect x="557.0830979772434" y="234.0612123187843" width="4" height="4" fill="#ffffff" opacity="0.6565481044353265">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1573454944485602s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node46">
-        <rect x="286.90430793924963" y="156.12997957426052" width="4" height="4" fill="#ffffff" opacity="0.8052572940592932">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.29980115253239s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node47">
-        <rect x="231.75264484527287" y="199.00066930996482" width="4" height="4" fill="#00f0ff" opacity="0.741250305363176">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.5581005679238997s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node48">
-        <rect x="441.8850581835701" y="212.7983540924826" width="4" height="4" fill="#00f0ff" opacity="0.7506639491833358">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.1956201105485815s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node49">
-        <rect x="704.3284304612699" y="143.3278409849127" width="4" height="4" fill="#ffffff" opacity="0.7016632171816353">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.838157434127262s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node50">
-        <rect x="543.6171429380088" y="87.80438286747177" width="4" height="4" fill="#ffffff" opacity="0.5636670983975048">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4811409378113316s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node51">
-        <rect x="288.02784769947255" y="79.43672403173241" width="4" height="4" fill="#ffffff" opacity="0.49537780741346116">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.4881911038479405s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node52">
-        <rect x="456.78958038941494" y="98.29135131060934" width="4" height="4" fill="#ffffff" opacity="0.879743609538762">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.0231348348746716s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node53">
-        <rect x="453.0343859324405" y="234.55518995476416" width="4" height="4" fill="#ffffff" opacity="0.5640433275077384">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.35705593258343s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node54">
-        <rect x="641.2743057283787" y="173.61043184690874" width="4" height="4" fill="#ffffff" opacity="0.7282880496315729">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.4089713045758425s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node55">
-        <rect x="293.859972582723" y="115.17585623239793" width="4" height="4" fill="#ffffff" opacity="0.5073315584553623">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.6136555438271052s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node56">
-        <rect x="608.556397945391" y="114.88981207516963" width="4" height="4" fill="#ffffff" opacity="0.4132862331435185">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.997808633551935s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node57">
-        <rect x="327.8251890969248" y="90.7419287453183" width="4" height="4" fill="#ffffff" opacity="0.7989407203997041">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.246430013641846s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node58">
-        <rect x="466.5858590144079" y="168.82319254119696" width="4" height="4" fill="#ffffff" opacity="0.8856941817415485">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.9364105060042243s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node59">
-        <rect x="511.94044333821114" y="105.03250780541492" width="4" height="4" fill="#ffffff" opacity="0.5892733227054033">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.1841282553516232s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node60">
-        <rect x="281.3860099522847" y="270.2678502075699" width="4" height="4" fill="#00f0ff" opacity="0.9918612033861445">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.195179798477822s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node61">
-        <rect x="760.7948477128332" y="0.5997024057565987" width="4" height="4" fill="#ffffff" opacity="0.7507848176407419">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.394975117399649s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node62">
-        <rect x="30.329836852617966" y="48.95625062381005" width="4" height="4" fill="#ffffff" opacity="0.7366377814794689">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.194316072150623s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node63">
-        <rect x="421.2070059870526" y="176.86718480063053" width="4" height="4" fill="#ffffff" opacity="0.6515038178764574">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.9267497117555896s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node64">
-        <rect x="457.5163352713115" y="97.0610519242579" width="4" height="4" fill="#00f0ff" opacity="0.7040936343923547">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.8252521481763533s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node65">
-        <rect x="489.6387107879564" y="186.71442151738123" width="4" height="4" fill="#ffffff" opacity="0.6598290608852464">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="3.589783384175303s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node66">
-        <rect x="209.61107479943863" y="274.19585384776394" width="4" height="4" fill="#ffffff" opacity="0.8151612047891099">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.2438077478458798s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node67">
-        <rect x="235.356751448091" y="4.293079794415748" width="4" height="4" fill="#ffffff" opacity="0.5093974393749351">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="1.6314785519422292s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
-      <g class="node68">
-        <rect x="22.36618678310812" y="241.8545244251004" width="20" height="20" fill="none" stroke="#ff003c" stroke-width="1" />
-        <rect x="30.36618678310812" y="249.8545244251004" width="4" height="4" fill="#ff003c" />
-        <text x="47.36618678310812" y="246.8545244251004" class="mono font-10" fill="#ff003c">ID:32</text>
-      </g>
-    
-      <g class="node69">
-        <rect x="470.3603618194747" y="168.55123157220757" width="4" height="4" fill="#ffffff" opacity="0.5592744410721278">
-          <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2.990500372357493s" repeatCount="indefinite" />
-        </rect>
-      </g>
-    
+    <text x="452.67308881497297" y="-20" class="mono font-10" fill="rgba(255,255,255,0.15)" transform="rotate(90, 452.67308881497297, 0)">
+      <animate attributeName="y" from="-50" to="350" dur="16.066634961128806s" repeatCount="indefinite" />
+      0x9D366
+    </text>
+  
+    <text x="699.4916830165296" y="-20" class="mono font-10" fill="rgba(255,255,255,0.15)" transform="rotate(90, 699.4916830165296, 0)">
+      <animate attributeName="y" from="-50" to="350" dur="10.741579425249505s" repeatCount="indefinite" />
+      0x4E45C
+    </text>
+  
+    <text x="694.0106267421844" y="-20" class="mono font-10" fill="rgba(255,255,255,0.15)" transform="rotate(90, 694.0106267421844, 0)">
+      <animate attributeName="y" from="-50" to="350" dur="23.99442435660543s" repeatCount="indefinite" />
+      0xA4035
+    </text>
+  
+    <text x="561.5902298802587" y="-20" class="mono font-10" fill="rgba(255,255,255,0.15)" transform="rotate(90, 561.5902298802587, 0)">
+      <animate attributeName="y" from="-50" to="350" dur="16.86936151611514s" repeatCount="indefinite" />
+      0xA37B9
+    </text>
+  
+    <text x="518.7241340342932" y="-20" class="mono font-10" fill="rgba(255,255,255,0.15)" transform="rotate(90, 518.7241340342932, 0)">
+      <animate attributeName="y" from="-50" to="350" dur="11.662858922978804s" repeatCount="indefinite" />
+      0x9FE11
+    </text>
+  
+
+  <!-- TEXT BLOCK -->
+  <!-- Centered container -->
+  <g transform="translate(400, 135)">
+    
+    <!-- MOURTADA BOUIZAKARNE with intense RGB Split Glitch -->
+    <text x="0" y="0" class="name-text glitch-layer-1">MOURTADA BOUIZAKARNE</text>
+    <text x="0" y="0" class="name-text glitch-layer-2">MOURTADA BOUIZAKARNE</text>
+    <text x="0" y="0" class="name-text glitch-base">MOURTADA BOUIZAKARNE</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="35" class="title-text">DIGITAL ARCHITECT</text>
+    
+    <!-- Minimal decoration around text -->
+    <path d="M -300 45 L 300 45" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+    <path d="M -150 45 L 150 45" stroke="#22d3ee" stroke-width="2" />
+    <rect x="-10" y="44" width="20" height="4" fill="#ff003c" />
   </g>
+
+  <!-- CRT FX Foregrounds -->
+  
+  <!-- Fast Sweep Line -->
+  <rect x="0" y="0" width="100%" height="4" fill="rgba(0, 240, 255, 0.4)" class="sweep-line" />
+  <rect x="0" y="20" width="100%" height="2" fill="rgba(255, 0, 60, 0.3)" class="sweep-line" />
+
+  <!-- Scanlines Fine Pattern -->
+  <rect width="100%" height="100%" fill="url(#scanlinePattern)" pointer-events="none" />
 
   <!-- Vignette -->
-  <rect width="100%" height="100%" fill="none" stroke="#000" stroke-width="40" opacity="0.6" />
-
-  <!-- Name and Title -->
-  <!-- Shadow/glow for Name -->
-  <text x="400" y="145" class="name-text blur-layer" fill="rgba(255,255,255,0.4)">MOURTADA BOUIZAKARNE</text>
-  <text x="400" y="145" class="name-text blur-layer" fill="none" stroke="#ff003c" stroke-width="4" opacity="0.6">MOURTADA BOUIZAKARNE</text>
-  <text x="400" y="145" class="name-text">MOURTADA BOUIZAKARNE</text>
-  
-  <text x="400" y="180" class="title-text">DIGITAL ARCHITECT</text>
-
-  <!-- Overlays -->
-  <!-- Noise -->
-  <rect width="100%" height="100%" class="noise-layer" pointer-events="none" />
-  
-  <!-- Scanlines -->
-  <rect width="100%" height="100%" class="scanlines" />
-
-  <!-- Inset Shadow -->
-  <rect width="100%" height="100%" fill="none" stroke="rgba(0,0,0,0.8)" stroke-width="10" pointer-events="none" />
-  <rect width="100%" height="100%" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="20" pointer-events="none" />
+  <rect width="100%" height="100%" fill="none" stroke="#000" stroke-width="80" class="vignette" pointer-events="none" />
 </svg>
